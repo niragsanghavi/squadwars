@@ -202,30 +202,48 @@ input:focus{border-color:var(--blue)}
 
   <!-- ADMIN -->
   <div class="page" id="page-admin">
-    <div style="padding:8px 0 16px;font-size:20px;font-weight:700">Admin</div>
+    <div style="padding:8px 0 4px;font-size:20px;font-weight:700">Admin</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:16px">Only you should use this page</div>
+
     <div class="card">
-      <div class="card-title">Award Team Streak Bonus</div>
-      <div class="tmuted" style="margin-bottom:12px">+5 pts each when 3+ teammates logged on the same day</div>
-      <input type="date" id="aDate" min="2026-05-01" max="2026-05-31">
-      <select id="aTeam">
-        <option value="">Select team</option>
-        <option value="A">Team A</option>
-        <option value="B">Team B</option>
-        <option value="C">Team C</option>
-      </select>
-      <button class="btn btn-gold" onclick="awardStreak()">Award Team Streak</button>
+      <div class="card-title">Role Guide</div>
+      <div style="padding:10px 0;border-bottom:1px solid var(--border)">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <span class="rbadge rCaptain">Captain</span>
+          <span style="font-size:13px;font-weight:600">16 workouts target</span>
+        </div>
+        <div style="font-size:12px;color:var(--muted)">Hit target → <span style="color:var(--green)">+6 pts</span> &nbsp;|&nbsp; Miss → <span style="color:var(--red)">−6 pts</span></div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">Captains are weaker players — the role motivates them to show up</div>
+      </div>
+      <div style="padding:10px 0;border-bottom:1px solid var(--border)">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <span class="rbadge rVC">Vice Captain</span>
+          <span style="font-size:13px;font-weight:600">20 workouts target</span>
+        </div>
+        <div style="font-size:12px;color:var(--muted)">Hit target → <span style="color:var(--green)">+8 pts</span> &nbsp;|&nbsp; Miss → <span style="color:var(--red)">−5 pts</span></div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">VC is your most active player — assigned at start of month</div>
+      </div>
+      <div style="padding:10px 0">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <span class="rbadge rPlayer">Player</span>
+          <span style="font-size:13px;font-weight:600">No minimum target</span>
+        </div>
+        <div style="font-size:12px;color:var(--muted)">Earns base pts, streak bonus, and team streak bonus</div>
+      </div>
     </div>
+
+    <div class="card">
+      <div class="card-title">Team & Role Assignment</div>
+      <div class="tmuted" style="margin-bottom:12px">Set teams and roles at the start of each month</div>
+      <div id="adminRoles"></div>
+      <button class="btn btn-gold" style="margin-top:12px" onclick="saveRoles()">Save All Changes</button>
+    </div>
+
     <div class="card">
       <div class="card-title">Award 30-Day Bonus</div>
-      <div class="tmuted" style="margin-bottom:12px">+20 pts for logging all 31 days</div>
-      <select id="aPlayer">
-        <option value="">Select player</option>
-      </select>
+      <div class="tmuted" style="margin-bottom:12px">+20 pts for logging all 31 days in May</div>
+      <select id="aPlayer"><option value="">Select player</option></select>
       <button class="btn btn-gold" onclick="award30()">Award +20 Pts</button>
-    </div>
-    <div class="card">
-      <div class="card-title">Update Roles (VC changes weekly)</div>
-      <div id="adminRoles"></div>
     </div>
   </div>
 </div>
@@ -277,7 +295,7 @@ const MONTH=4, YEAR=2026, DAYS=31;
 
 // ── STATE ─────────────────────────────────────────────────────────────────
 let db, me=null, selDay=null, selW=[];
-let allLogs=[], tsBonus=[], bonus30=[];
+let allLogs=[], bonus30=[];
 
 // ── BOOT ─────────────────────────────────────────────────────────────────
 firebase.initializeApp(FB_CFG);
@@ -329,8 +347,6 @@ function boot(){
 function subscribe(){
   db.collection('logs').where('month','==',MONTH).where('year','==',YEAR)
     .onSnapshot(s=>{ allLogs=s.docs.map(d=>({id:d.id,...d.data()})); refresh(); });
-  db.collection('team_streaks').where('month','==',MONTH).where('year','==',YEAR)
-    .onSnapshot(s=>{ tsBonus=s.docs.map(d=>({id:d.id,...d.data()})); refresh(); });
   db.collection('bonuses_30day').where('month','==',MONTH).where('year','==',YEAR)
     .onSnapshot(s=>{ bonus30=s.docs.map(d=>({id:d.id,...d.data()})); refresh(); });
 }
@@ -365,8 +381,12 @@ function score(playerName){
   if(p.role==='Captain') rb = wo>=16?6:-6;
   else if(p.role==='Vice Captain') rb = wo>=20?8:-5;
 
-  // Team streak bonus
-  const tb = tsBonus.filter(b=>b.team===p.team).length*5;
+  // Team streak bonus — AUTO: count days where 3+ teammates logged
+  const teamLogs=allLogs.filter(l=>PLAYERS.find(x=>x.name===l.player&&x.team===p.team));
+  const dc={};
+  teamLogs.forEach(l=>{ if(!dc[l.day]) dc[l.day]=new Set(); dc[l.day].add(l.player); });
+  const qualDays=Object.values(dc).filter(ps=>ps.size>=3).length;
+  const tb=qualDays*5;
 
   // 30-day bonus
   const b30 = bonus30.find(b=>b.player===playerName)?20:0;
@@ -605,6 +625,7 @@ function renderFeed(){
     const w=Array.isArray(l.workouts)?l.workouts.join(', '):(l.workout||'');
     const ts=l.timestamp?.seconds?new Date(l.timestamp.seconds*1000):null;
     const tstr=ts?ts.toLocaleDateString('en-IN',{day:'numeric',month:'short'})+' · '+ts.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}):`May ${l.day}`;
+    const isMine=l.player===me.name;
     return `<div class="fi">
       <div class="fav" style="background:${tbg(l.team)};color:${tcol(l.team)};border:1.5px solid ${tcol(l.team)}">${l.player[0]}</div>
       <div class="ftxt">
@@ -612,19 +633,17 @@ function renderFeed(){
         <div class="fw">💪 ${w}</div>
         <div class="ft">${tstr}</div>
       </div>
+      ${isMine?`<button onclick="deleteLog('${l.id}')" style="background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;padding:4px 8px;flex-shrink:0" title="Delete">×</button>`:''}
     </div>`;
   }).join('');
 }
 
-// ── ADMIN ─────────────────────────────────────────────────────────────────
-async function awardStreak(){
-  const d=document.getElementById('aDate').value, t=document.getElementById('aTeam').value;
-  if(!d||!t){ alert('Select date and team'); return; }
-  const day=new Date(d).getDate();
-  if(tsBonus.find(b=>b.team===t&&b.day===day)){ alert('Already awarded'); return; }
-  await db.collection('team_streaks').add({team:t,day,month:MONTH,year:YEAR});
-  alert(`✅ +5 pts awarded to all Team ${t} members for May ${day}`);
+async function deleteLog(id){
+  if(!confirm('Delete this workout entry?')) return;
+  await db.collection('logs').doc(id).delete();
 }
+
+// ── ADMIN ─────────────────────────────────────────────────────────────────
 async function award30(){
   const p=document.getElementById('aPlayer').value;
   if(!p){ alert('Select player'); return; }
@@ -634,18 +653,29 @@ async function award30(){
 }
 function renderAdminRoles(){
   document.getElementById('adminRoles').innerHTML=PLAYERS.map(p=>`
-    <div class="row" style="padding:8px 0;border-bottom:1px solid var(--border)">
-      <span style="font-size:13px">${p.name}</span>
-      <select onchange="updateRole('${p.name}',this.value)" style="width:140px;padding:6px 8px;font-size:12px;margin-bottom:0">
+    <div style="display:grid;grid-template-columns:1fr 90px 130px;gap:6px;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)">
+      <span style="font-size:13px;font-weight:600">${p.name}</span>
+      <select id="team_${p.name}" style="padding:6px 6px;font-size:12px;margin-bottom:0">
+        <option value="A"${p.team==='A'?' selected':''}>Team A</option>
+        <option value="B"${p.team==='B'?' selected':''}>Team B</option>
+        <option value="C"${p.team==='C'?' selected':''}>Team C</option>
+      </select>
+      <select id="role_${p.name}" style="padding:6px 6px;font-size:12px;margin-bottom:0">
         ${['Player','Vice Captain','Captain'].map(r=>`<option value="${r}"${p.role===r?' selected':''}>${r}</option>`).join('')}
       </select>
     </div>`).join('');
 }
-function updateRole(name,role){
-  const p=PLAYERS.find(x=>x.name===name); if(!p) return;
-  p.role=role;
-  if(me.name===name){ me.role=role; localStorage.setItem('sw_user',JSON.stringify(me)); }
+function saveRoles(){
+  PLAYERS.forEach(p=>{
+    const t=document.getElementById(`team_${p.name}`)?.value;
+    const r=document.getElementById(`role_${p.name}`)?.value;
+    if(t) p.team=t;
+    if(r) p.role=r;
+    if(me.name===p.name){ me.team=p.team; me.role=p.role; localStorage.setItem('sw_user',JSON.stringify(me)); }
+  });
+  renderAdminRoles();
   refresh();
+  alert('✅ Teams and roles updated!');
 }
 
 // ── TABS ──────────────────────────────────────────────────────────────────
