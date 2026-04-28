@@ -461,12 +461,11 @@ function renderHome(){
   const dc={};
   teamLogs.forEach(l=>{ if(!dc[l.day]) dc[l.day]=new Set(); dc[l.day].add(l.player); });
   const bonusDays=Object.entries(dc).filter(([d,ps])=>ps.size>=3).map(([d])=>+d).sort((a,b)=>a-b);
-  const awarded=tsBonus.filter(b=>b.team===team).map(b=>b.day);
   let scHTML=bonusDays.length===0
     ?'<div class="tmuted">No team streak days yet. Need 3+ members on the same day!</div>'
     :bonusDays.map(d=>`<div class="row" style="padding:6px 0;border-bottom:1px solid var(--border)">
         <span style="font-size:13px">May ${d} — ${dc[d].size} members</span>
-        <span style="font-size:11px;color:${awarded.includes(d)?'var(--green)':'var(--muted)'}">${awarded.includes(d)?'✅ +5 awarded':'⏳ Pending admin'}</span>
+        <span style="font-size:11px;color:var(--green)">✅ +5 auto-awarded</span>
       </div>`).join('');
   document.getElementById('streakCard').innerHTML=`<div class="card-title">Team ${team} qualifying days</div>${scHTML}`;
 }
@@ -680,7 +679,15 @@ function saveRoles(){
 
 // ── TABS ──────────────────────────────────────────────────────────────────
 const TABS=['home','log','lb','feed','admin'];
+const ADMIN_PIN='9090';
+let adminUnlocked=false;
+
 function showTab(t){
+  if(t==='admin'&&!adminUnlocked){
+    const pin=prompt('Enter admin PIN:');
+    if(pin!==ADMIN_PIN){ alert('Wrong PIN'); return; }
+    adminUnlocked=true;
+  }
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
   document.getElementById(`page-${t}`).classList.add('active');
