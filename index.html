@@ -376,10 +376,15 @@ function score(playerName){
     wb+=5;
   });
 
-  // Role bonus
+  // Role bonus — only applies on last day of month
+  const today=new Date();
+  const isLastDay=today.getMonth()===MONTH&&today.getFullYear()===YEAR&&today.getDate()===31;
+  const isAfterMonth=today.getMonth()>MONTH||today.getFullYear()>YEAR;
   let rb=0;
-  if(p.role==='Captain') rb = wo>=16?6:-6;
-  else if(p.role==='Vice Captain') rb = wo>=20?8:-5;
+  if(isLastDay||isAfterMonth){
+    if(p.role==='Captain') rb = wo>=16?6:-6;
+    else if(p.role==='Vice Captain') rb = wo>=20?8:-5;
+  }
 
   // Team streak bonus — AUTO: count days where 3+ teammates logged
   const teamLogs=allLogs.filter(l=>PLAYERS.find(x=>x.name===l.player&&x.team===p.team));
@@ -392,7 +397,7 @@ function score(playerName){
   const b30 = bonus30.find(b=>b.player===playerName)?20:0;
 
   // Penalty
-  const pen = wo<12?(wo-12)*2:0;
+  const pen = (isLastDay||isAfterMonth)&&wo<12?(wo-12)*2:0;
 
   const total = base+sb+wb+rb+tb+b30+pen;
   return {wo,base,sb,wb,rb,tb,b30,pen,total,streak,days};
@@ -434,9 +439,24 @@ function renderHome(){
       </div>
       <div class="pwrap"><div class="pbar" style="width:${pct}%;background:${bc}"></div></div>
       <div style="font-size:11px;color:var(--muted);margin-top:6px">${ROLE_DESC[pl.role]}</div>
+      ${(()=>{
+        const tgt=pl.role==='Captain'?16:20;
+        const bonus=pl.role==='Captain'?6:8;
+        const penalty=pl.role==='Captain'?6:5;
+        const remaining=Math.max(0,tgt-sc.wo);
+        if(sc.wo>=tgt) return `<div style="margin-top:8px;padding:8px 10px;background:var(--green-l);border:1px solid var(--green);border-radius:6px;font-size:12px;color:var(--green)">✅ Target hit — +${bonus} pts will be added on May 31</div>`;
+        return `<div style="margin-top:8px;padding:8px 10px;background:var(--red-l);border:1px solid var(--red);border-radius:6px;font-size:12px;color:var(--red)">⚠️ ${remaining} more workouts needed — missing target will deduct ${penalty} pts on May 31</div>`;
+      })()}
     </div>`;
   }
-  document.getElementById('roleBar').innerHTML=rHTML;
+  // Minimum workout warning
+  const minWarning=(()=>{
+    if(sc.wo>=12) return '';
+    const missing=12-sc.wo;
+    const deduction=missing*2;
+    return `<div style="background:var(--orange-l);border:1px solid var(--orange);border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:13px;color:var(--orange)">⚠️ Minimum workout warning — you need ${missing} more workouts to avoid a <strong>${deduction} pt deduction</strong> on May 31</div>`;
+  })();
+  document.getElementById('roleBar').innerHTML=minWarning+rHTML;
 
   // Calendar
   const today=new Date();
