@@ -302,6 +302,14 @@ firebase.initializeApp(FB_CFG);
 db = firebase.firestore();
 
 window.onload = () => {
+  const savedPlayers = localStorage.getItem('sw_players');
+  if(savedPlayers){ 
+    const parsed = JSON.parse(savedPlayers);
+    parsed.forEach(saved => {
+      const p = PLAYERS.find(x=>x.name===saved.name);
+      if(p){ p.team=saved.team; p.role=saved.role; }
+    });
+  }
   const s = localStorage.getItem('sw_user');
   if(s){ me=JSON.parse(s); boot(); } else { buildOnboard(); }
 };
@@ -690,8 +698,10 @@ function saveRoles(){
     const r=document.getElementById(`role_${p.name}`)?.value;
     if(t) p.team=t;
     if(r) p.role=r;
-    if(me.name===p.name){ me.team=p.team; me.role=p.role; localStorage.setItem('sw_user',JSON.stringify(me)); }
+    if(me.name===p.name){ me.team=p.team; me.role=p.role; }
   });
+  localStorage.setItem('sw_user', JSON.stringify(me));
+  localStorage.setItem('sw_players', JSON.stringify(PLAYERS));
   renderAdminRoles();
   refresh();
   alert('✅ Teams and roles updated!');
