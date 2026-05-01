@@ -394,12 +394,21 @@ function score(playerName){
     else if(p.role==='Vice Captain') rb = wo>=20?8:-5;
   }
 
-  // Team streak bonus — AUTO: count days where 3+ teammates logged
+ // Team streak bonus — only players who logged on qualifying days get the bonus
+  // Bonus is cumulative: +1 first consecutive day, +2 second, +3 third (capped), resets on break
   const teamLogs=allLogs.filter(l=>PLAYERS.find(x=>x.name===l.player&&x.team===p.team));
   const dc={};
   teamLogs.forEach(l=>{ if(!dc[l.day]) dc[l.day]=new Set(); dc[l.day].add(l.player); });
-  const qualDays=Object.values(dc).filter(ps=>ps.size>=3).length;
-  const tb=qualDays*5;
+  let tb=0, teamStreak=0;
+  for(let d=1;d<=DAYS;d++){
+    const playersToday=dc[d]||new Set();
+    if(playersToday.size>=3){
+      teamStreak++;
+      if(playersToday.has(playerName)) tb+=Math.min(3,teamStreak);
+    } else {
+      teamStreak=0;
+    }
+  }
 
   // 30-day bonus
   const b30 = bonus30.find(b=>b.player===playerName)?20:0;
