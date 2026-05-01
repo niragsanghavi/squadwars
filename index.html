@@ -698,8 +698,10 @@ function saveRoles(){
     const r=document.getElementById(`role_${p.name}`)?.value;
     if(t) p.team=t;
     if(r) p.role=r;
-    if(me.name===p.name){ me.team=p.team; me.role=p.role; }
   });
+  // Refresh me from updated PLAYERS so it stays in sync
+  const fresh=PLAYERS.find(p=>p.name===me.name);
+  if(fresh){ me.team=fresh.team; me.role=fresh.role; }
   localStorage.setItem('sw_user', JSON.stringify(me));
   localStorage.setItem('sw_players', JSON.stringify(PLAYERS));
   renderAdminRoles();
