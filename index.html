@@ -511,11 +511,12 @@ function score(playerName){
   const wo = days.size;
   const base = wo*2;
 
-  let sb=0, cur=0;
+  let cur=0;
   for(let d=1;d<=DAYS;d++){
-    if(days.has(d)){ cur++; sb+=Math.min(3,cur); } else { cur=0; }
+    if(days.has(d)) cur++; else cur=0;
   }
   const streak=cur;
+  const sb=0;
 
   const fullWeeks=[[4,10],[11,17],[18,24],[25,31]];
   let wb=0;
@@ -812,7 +813,6 @@ function renderLB(){
     <div class="card-title">Your breakdown</div>
     ${[
       ['Base points',my.base,`${my.wo} workouts × 2`],
-      ['Streak bonus',my.sb,'Daily consecutive (max +3/day)'],
       ['Perfect week',my.wb,'+5 per full Mon–Sun week'],
       ['Role bonus',my.rb,ROLE_DESC[PLAYERS.find(p=>p.name===me.name).role].split('→')[0]],
       ['Team streak',my.tb,'Cumulative team streak bonus'],
