@@ -707,11 +707,12 @@ function goS2(){
 function buildChips(){
   const mine=[...new Set(allLogs.filter(l=>l.player===me.name).flatMap(l=>l.workouts||[l.workout]).filter(Boolean))];
   const all=[...new Set([...mine,...COMMON])];
-  document.getElementById('wChips').innerHTML=all.map(w=>
-    `<div class="chip${mine.includes(w)?' mine':''}" onclick="toggleChip(this,'${w.replace(/'/g,"\\'")}'">${w}</div>`
-  ).join('');
+  document.getElementById('wChips').innerHTML=all.map((w,i)=>{
+    const cls=mine.includes(w)?'mine':'';
+    return `<div class="chip ${cls}" id="chip_${i}" onclick="toggleChip(this,'chip_${i}','${w.replace(/'/g,"\\'")}')">${w}</div>`;
+  }).join('');
 }
-function toggleChip(el,w){
+function toggleChip(el,chipId,w){
   el.classList.toggle('sel');
   if(el.classList.contains('sel')){ if(!selW.includes(w)) selW.push(w); }
   else { selW=selW.filter(x=>x!==w); }
