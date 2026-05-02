@@ -846,11 +846,11 @@ function renderFeed(){
     const ts=l.timestamp?.seconds?new Date(l.timestamp.seconds*1000):null;
     const tstr=ts?ts.toLocaleDateString('en-IN',{day:'numeric',month:'short'})+' · '+ts.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}):`May ${l.day}`;
     const isMine=l.player===me.name;
-    const currentTeam = (PLAYERS.find(x=>x.name===l.player)||{team:l.team}).team;
+    const ct = (PLAYERS.find(x=>x.name===l.player)||{team:l.team}).team;
     return `<div class="fi">
-      <div class="fav" style="background:${tbg(currentTeam)};color:${tcol(currentTeam)};border:2px solid ${tcol(currentTeam)}">${l.player[0]}</div>
+      <div class="fav" style="background:${tbg(ct)};color:${tcol(ct)};border:2px solid ${tcol(ct)}">${l.player[0]}</div>
       <div class="ftxt">
-        <div class="fn">${l.player} <span style="font-size:10px;color:${tcol(currentTeam)};font-weight:700">Team ${currentTeam}</span></div>(l.team)};font-weight:700">Team ${l.team}</span></div>
+        <div class="fn">${l.player} <span style="font-size:10px;color:${tcol(ct)};font-weight:700">Team ${ct}</span></div>
         <div class="fw">💪 ${w}</div>
         <div class="ft">${tstr}</div>
       </div>
