@@ -511,8 +511,10 @@ function score(playerName){
   const wo = days.size;
   const base = wo*2;
 
+  const today=new Date();
+  const todayDay=today.getMonth()===MONTH&&today.getFullYear()===YEAR?today.getDate():DAYS;
   let cur=0;
-  for(let d=1;d<=DAYS;d++){
+  for(let d=1;d<=todayDay;d++){
     if(days.has(d)) cur++; else cur=0;
   }
   const streak=cur;
