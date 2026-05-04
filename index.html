@@ -677,7 +677,7 @@ function getNudgeHTML(playerName, sc){
   }
   const ahead=sorted[myIdx-1];
   const gap=ahead.pts-myPts;
-  const needed=Math.ceil(gap/2)+1;
+  const needed=Math.ceil(gap/2);
   return `<div class="nudge"><div class="nudge-icon">⚡</div><div class="nudge-text">You're <strong>${gap} pts behind ${ahead.name}</strong>. ${needed} workout${needed>1?'s':''} and you overtake them.</div></div>`;
 }
 
