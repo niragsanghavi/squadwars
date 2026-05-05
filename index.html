@@ -176,11 +176,11 @@ input::placeholder{color:var(--muted)}
       <button class="btn btn-dark" onclick="pickDay('today')">Today</button>
       <button class="btn btn-surface" onclick="showPicker()">Another day</button>
       <div id="pickerWrap" class="hidden" style="margin-top:4px">
-        <div class="date-trigger" onclick="document.getElementById('dpick').showPicker()">
-          <span>📅</span> Tap to open calendar
-        </div>
-        <input type="date" id="dpick" onchange="pickDayFromInput()" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px">
+        <input type="date" id="dpick" onchange="pickDayFromInput()" 
+          min="2026-05-01" max="2026-05-31"
+          style="background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:15px;padding:13px 14px;width:100%;outline:none;font-family:inherit;margin-bottom:8px;cursor:pointer">
       </div>
+
     </div>
     <div id="ls2" class="hidden">
       <div class="row" style="margin-bottom:16px">
