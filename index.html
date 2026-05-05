@@ -16,27 +16,17 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh}
-
-/* NAV */
 .nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:54px;position:sticky;top:0;z-index:100;box-shadow:var(--shadow)}
 .nav-title{font-size:17px;font-weight:800;color:var(--text);letter-spacing:2px}
 .nav-user{font-size:12px;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:8px}
 .nav-av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
-
-/* TABS */
 .tabs{display:flex;background:var(--surface);border-bottom:1px solid var(--border)}
 .tab{flex:1;padding:13px 4px;text-align:center;font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s}
 .tab.active{color:var(--text);border-bottom-color:var(--text);font-weight:700}
-
-/* PAGES */
 .page{display:none;padding:16px;max-width:500px;margin:0 auto}
 .page.active{display:block}
-
-/* CARDS */
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
 .card-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px}
-
-/* BUTTONS */
 .btn{display:block;width:100%;padding:14px;border-radius:var(--r);border:none;font-size:15px;font-weight:700;cursor:pointer;transition:all .15s;text-align:center;margin-bottom:8px;letter-spacing:.2px}
 .btn:active{transform:scale(.98);opacity:.9}
 .btn:disabled{opacity:.35;cursor:default}
@@ -44,13 +34,9 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .btn-surface{background:var(--surface);color:var(--text);border:1px solid var(--border)}
 .btn-green{background:var(--green);color:#fff}
 .btn-sm{padding:8px 14px;font-size:12px;width:auto;display:inline-block;border-radius:8px;margin-bottom:0}
-
-/* INPUTS */
 input,select{background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:15px;padding:12px 14px;width:100%;outline:none;font-family:inherit;margin-bottom:8px}
 input:focus,select:focus{border-color:var(--text)}
 input::placeholder{color:var(--muted)}
-
-/* ONBOARDING */
 #ob{position:fixed;inset:0;background:var(--text);z-index:300;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;overflow-y:auto}
 .obtitle{font-size:40px;font-weight:900;color:var(--gold);letter-spacing:4px;margin-bottom:6px;text-align:center}
 .obsub{font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:32px;text-align:center}
@@ -62,45 +48,33 @@ input::placeholder{color:var(--muted)}
 .prole{font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px}
 .pteam{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;display:inline-block}
 .tA{background:var(--Al);color:var(--A)}.tB{background:var(--Bl);color:var(--B)}.tC{background:var(--Cl);color:var(--C)}
-
-/* HERO CARD */
 .hero{border-radius:16px;padding:20px;margin-bottom:12px;position:relative;overflow:hidden;color:#fff}
 .hero-stripe{position:absolute;top:0;left:0;width:5px;height:100%}
 .hero-label{font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;padding-left:14px}
 .hero-pts{font-size:58px;font-weight:900;color:var(--gold);line-height:1;padding-left:14px}
 .hero-sub{font-size:13px;color:rgba(255,255,255,0.6);padding-left:14px;margin-top:4px}
-
-/* NUDGE */
 .nudge{background:var(--card);border-radius:var(--r);padding:13px 14px;margin-bottom:12px;border-left:4px solid var(--green);display:flex;align-items:flex-start;gap:10px;box-shadow:var(--shadow)}
 .nudge-icon{font-size:18px;flex-shrink:0;margin-top:1px}
 .nudge-text{font-size:13px;color:var(--text);line-height:1.5;font-weight:500}
 .nudge-text strong{color:var(--green)}
-
-/* STREAK CARD */
 .streak-card{background:var(--gold-l);border:1.5px solid var(--gold);border-radius:var(--r);padding:14px;margin-bottom:12px;text-align:center}
 .streak-num{font-size:32px;font-weight:900;color:var(--orange);margin-bottom:4px}
 .streak-msg{font-size:13px;color:var(--text);font-weight:600;line-height:1.4}
-
-/* FACT CARD */
 .fact-card{background:var(--purple-l);border:1px solid var(--purple);border-radius:var(--r);padding:13px 14px;margin-bottom:12px;display:flex;gap:10px;align-items:flex-start}
 .fact-icon{font-size:18px;flex-shrink:0}
 .fact-text{font-size:12px;color:var(--purple);font-weight:500;line-height:1.5}
-
-/* STATS */
 .srow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
 .sc{background:var(--card);border-radius:var(--r);padding:14px 12px;text-align:center;border:1px solid var(--border);box-shadow:var(--shadow)}
 .sv{font-size:26px;font-weight:800;color:var(--text)}
 .sl{font-size:10px;color:var(--muted);margin-top:3px;font-weight:600;letter-spacing:.3px;text-transform:uppercase}
-
-/* CALENDAR */
 .cg{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
 .cdh{font-size:10px;color:var(--muted);text-align:center;padding:4px 0;font-weight:600}
-.cd{aspect-ratio:1;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;background:#f3f4f6;color:#9ca3af}
-.cd.logged{background:var(--green-l);color:var(--green);border:1px solid var(--green)}
+.cd{aspect-ratio:1;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;background:#f3f4f6;color:#9ca3af;position:relative}
+.cd.logged{background:var(--green-l);color:var(--green);border:1px solid var(--green);cursor:pointer}
 .cd.today{background:var(--text);color:var(--gold);font-weight:900}
 .cd.empty{background:transparent}
-
-/* LEADERBOARD */
+.cal-tip{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#1a1a2e;color:#fff;font-size:10px;font-weight:600;padding:5px 8px;border-radius:7px;white-space:nowrap;z-index:99;max-width:160px;white-space:normal;line-height:1.4;text-align:center;pointer-events:none}
+.cal-tip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:4px solid transparent;border-top-color:#1a1a2e}
 .lbrow{display:flex;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);gap:10px}
 .lbrow:last-child{border-bottom:none}
 .lbrow.top1{background:linear-gradient(90deg,var(--gold-l) 0%,transparent 100%);margin:0 -16px;padding:12px 16px;border-radius:8px}
@@ -109,21 +83,15 @@ input::placeholder{color:var(--muted)}
 .lbinfo{flex:1}
 .lbname{font-size:14px;font-weight:700;color:var(--text)}
 .lbmeta{font-size:11px;color:var(--muted);margin-top:2px}
-
-/* TEAM CARDS */
 .tcard{border-radius:var(--r);padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;border:1.5px solid var(--border);box-shadow:var(--shadow)}
 .tcard.A{background:var(--Al);border-color:var(--A)}.tcard.B{background:var(--Bl);border-color:var(--B)}.tcard.C{background:var(--Cl);border-color:var(--C)}
 .tcname{font-size:15px;font-weight:800}
 .tcard.A .tcname{color:var(--A)}.tcard.B .tcname{color:var(--B)}.tcard.C .tcname{color:var(--C)}
-
-/* CHIPS */
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
 .chip{padding:8px 14px;border-radius:20px;font-size:13px;background:var(--bg);border:1px solid var(--border);cursor:pointer;transition:all .15s;user-select:none;font-weight:500}
 .chip:active{transform:scale(.95)}
 .chip.sel{background:var(--blue-l);border-color:var(--blue);color:var(--blue);font-weight:700}
 .chip.mine{border-color:var(--gold);border-width:1.5px}
-
-/* FEED */
 .fi{display:flex;gap:10px;padding:11px 0;border-bottom:1px solid var(--border);align-items:flex-start}
 .fi:last-child{border-bottom:none}
 .fav{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
@@ -131,25 +99,17 @@ input::placeholder{color:var(--muted)}
 .fn{font-size:13px;font-weight:700;color:var(--text)}
 .fw{font-size:12px;color:var(--muted);margin-top:2px}
 .ft{font-size:10px;color:var(--muted);margin-top:2px}
-
-/* BADGES */
 .rbadge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700}
 .rCaptain{background:var(--red-l);color:var(--red)}
 .rVC{background:var(--orange-l);color:var(--orange)}
 .rPlayer{background:#f3f4f6;color:var(--muted)}
-
-/* PROGRESS */
 .pwrap{background:#e5e7eb;border-radius:4px;height:6px;overflow:hidden;margin-top:8px}
 .pbar{height:100%;border-radius:4px;transition:width .5s ease}
-
-/* SUCCESS */
 .succ{text-align:center;padding:40px 20px}
 .succ-icon{font-size:64px;margin-bottom:16px}
 .succ-title{font-size:26px;font-weight:800;color:var(--green);margin-bottom:8px}
 .succ-sub{font-size:14px;color:var(--muted);margin-bottom:8px;line-height:1.5}
 .comeback-msg{font-size:14px;color:var(--orange);font-weight:600;margin-bottom:20px;padding:12px;background:var(--orange-l);border-radius:10px;line-height:1.5}
-
-/* UTILS */
 .shdr{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin:20px 0 10px}
 .row{display:flex;align-items:center;justify-content:space-between}
 .tmuted{color:var(--muted);font-size:13px;line-height:1.5}
@@ -158,11 +118,13 @@ input::placeholder{color:var(--muted)}
 .warn-green{background:var(--green-l);border:1px solid var(--green);color:var(--green)}
 .warn-red{background:var(--red-l);border:1px solid var(--red);color:var(--red)}
 .warn-orange{background:var(--orange-l);border:1px solid var(--orange);color:var(--orange)}
+/* date picker trigger */
+.date-trigger{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 14px;width:100%;font-size:15px;color:var(--muted);cursor:pointer;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.date-trigger span{font-size:16px}
 </style>
 </head>
 <body>
 
-<!-- ONBOARDING -->
 <div id="ob">
   <div class="obtitle">SQUAD WARS</div>
   <div class="obsub">Who are you?</div>
@@ -170,7 +132,6 @@ input::placeholder{color:var(--muted)}
   <div style="margin-top:14px;font-size:11px;color:rgba(255,255,255,0.3);text-align:center">We'll remember you on this device</div>
 </div>
 
-<!-- APP -->
 <div id="app" class="hidden">
   <nav class="nav">
     <div class="nav-title">SQUAD WARS</div>
@@ -215,7 +176,10 @@ input::placeholder{color:var(--muted)}
       <button class="btn btn-dark" onclick="pickDay('today')">Today</button>
       <button class="btn btn-surface" onclick="showPicker()">Another day</button>
       <div id="pickerWrap" class="hidden" style="margin-top:4px">
-        <input type="date" id="dpick" onchange="pickDayFromInput()">
+        <div class="date-trigger" onclick="document.getElementById('dpick').showPicker()">
+          <span>📅</span> Tap to open calendar
+        </div>
+        <input type="date" id="dpick" onchange="pickDayFromInput()" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px">
       </div>
     </div>
     <div id="ls2" class="hidden">
@@ -276,14 +240,15 @@ input::placeholder{color:var(--muted)}
           <span class="rbadge rCaptain">Captain</span>
           <span style="font-size:13px;font-weight:700">16 workouts target</span>
         </div>
-        <div style="font-size:12px;color:var(--muted)">Hit → <span style="color:var(--green);font-weight:700">+6 pts</span> on May 31 &nbsp;|&nbsp; Miss → <span style="color:var(--red);font-weight:700">−6 pts</span></div>
+        <div style="font-size:12px;color:var(--muted)">Hit → <span style="color:var(--green);font-weight:700">+10 pts</span> on May 31 &nbsp;|&nbsp; Miss → <span style="color:var(--red);font-weight:700">−10 pts</span></div>
+        <div style="font-size:11px;color:var(--muted);margin-top:3px">Miss by 3+ workouts and the penalty applies</div>
       </div>
       <div style="padding:10px 0;border-bottom:1px solid var(--border)">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
           <span class="rbadge rVC">Vice Captain</span>
           <span style="font-size:13px;font-weight:700">20 workouts target</span>
         </div>
-        <div style="font-size:12px;color:var(--muted)">Hit → <span style="color:var(--green);font-weight:700">+8 pts</span> on May 31 &nbsp;|&nbsp; Miss → <span style="color:var(--red);font-weight:700">−5 pts</span></div>
+        <div style="font-size:12px;color:var(--muted)">Hit → <span style="color:var(--green);font-weight:700">+15 pts</span> on May 31 &nbsp;|&nbsp; Miss → <span style="color:var(--red);font-weight:700">−10 pts</span></div>
       </div>
       <div style="padding:10px 0">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
@@ -301,9 +266,9 @@ input::placeholder{color:var(--muted)}
     </div>
     <div class="card">
       <div class="card-title">Award 30-Day Bonus</div>
-      <div class="tmuted" style="margin-bottom:10px">+20 pts for logging all 31 days</div>
+      <div class="tmuted" style="margin-bottom:10px">+50 pts for logging all 31 days</div>
       <select id="aPlayer"><option value="">Select player</option></select>
-      <button class="btn btn-dark" onclick="award30()">Award +20 Pts</button>
+      <button class="btn btn-dark" onclick="award30()">Award +50 Pts</button>
     </div>
   </div>
 </div>
@@ -339,8 +304,8 @@ let PLAYERS = [
 ];
 
 const ROLE_DESC = {
-  "Captain":      "Target: 16 workouts → +6 pts. Miss → -6 pts.",
-  "Vice Captain": "Target: 20 workouts → +8 pts. Miss → -5 pts.",
+  "Captain":      "Target: 16 workouts → +10 pts. Miss → -10 pts.",
+  "Vice Captain": "Target: 20 workouts → +15 pts. Miss → -10 pts.",
   "Player":       "Earn points through workouts, streaks, and team bonuses."
 };
 
@@ -351,7 +316,6 @@ const COMMON = ["Gym","Padel","Walk","Run","Yoga","Volleyball","Cricket","Swimmi
 
 const MONTH=4, YEAR=2026, DAYS=31;
 
-// ── CONTENT ────────────────────────────────────────────────────────────────
 const DAILY_FACTS = [
   "Your heart pumps 5 litres of blood per minute at rest. During exercise, that jumps to 20.",
   "Muscle doesn't turn to fat when you stop training. They're completely different tissues.",
@@ -387,18 +351,18 @@ const DAILY_FACTS = [
 ];
 
 const STREAK_MSGS = {
-  2:  "Two in a row. Even your excuses are impressed.",
-  3:  "Three days straight. Your bed is filing a complaint.",
-  4:  "Four days. The couch has started a support group.",
-  5:  "Five days straight. Your alarm is starting to respect you.",
-  6:  "Six days. At this point your body thinks this is normal. It is.",
-  7:  "A full week. Somewhere, a gym bro is shedding a single tear of pride.",
-  8:  "Eight days. You're either very disciplined or very competitive. Both work.",
-  9:  "Nine days. The excuses have packed their bags and left.",
-  10: "Ten days. You're basically a professional at this point.",
-  14: "Two weeks straight. Your past self wouldn't believe it.",
-  21: "Three weeks. Scientists say habits form at 21 days. Congratulations, you're a habit.",
-  30: "Thirty days. You absolute machine. This is the way.",
+  2:"Two in a row. Even your excuses are impressed.",
+  3:"Three days straight. Your bed is filing a complaint.",
+  4:"Four days. The couch has started a support group.",
+  5:"Five days straight. Your alarm is starting to respect you.",
+  6:"Six days. At this point your body thinks this is normal. It is.",
+  7:"A full week. Somewhere, a gym bro is shedding a single tear of pride.",
+  8:"Eight days. You're either very disciplined or very competitive. Both work.",
+  9:"Nine days. The excuses have packed their bags and left.",
+  10:"Ten days. You're basically a professional at this point.",
+  14:"Two weeks straight. Your past self wouldn't believe it.",
+  21:"Three weeks. Scientists say habits form at 21 days. Congratulations, you're a habit.",
+  30:"Thirty days. You absolute machine. This is the way.",
 };
 
 const COMEBACK_MSGS = [
@@ -414,147 +378,101 @@ const COMEBACK_MSGS = [
   "Rest days are healthy. Several of them in a row is a lifestyle choice. Welcome back.",
 ];
 
-function getDailyFact(){
-  const d = new Date().getDate();
-  return DAILY_FACTS[(d-1) % DAILY_FACTS.length];
-}
+function getDailyFact(){ return DAILY_FACTS[(new Date().getDate()-1)%DAILY_FACTS.length]; }
+function getStreakMsg(s){ const keys=Object.keys(STREAK_MSGS).map(Number).sort((a,b)=>b-a); for(const k of keys){ if(s>=k) return STREAK_MSGS[k]; } return null; }
+function getRandomComeback(){ return COMEBACK_MSGS[Math.floor(Math.random()*COMEBACK_MSGS.length)]; }
 
-function getStreakMsg(streak){
-  const keys = Object.keys(STREAK_MSGS).map(Number).sort((a,b)=>b-a);
-  for(const k of keys){ if(streak>=k) return STREAK_MSGS[k]; }
-  return null;
-}
-
-function getRandomComeback(){
-  return COMEBACK_MSGS[Math.floor(Math.random()*COMEBACK_MSGS.length)];
-}
-
-// ── STATE ──────────────────────────────────────────────────────────────────
-let db, me=null, selDay=null, selW=[];
-let allLogs=[], bonus30=[];
+let db,me=null,selDay=null,selW=[];
+let allLogs=[],bonus30=[];
 
 firebase.initializeApp(FB_CFG);
-db = firebase.firestore();
+db=firebase.firestore();
 
-window.onload = () => {
-  const savedPlayers = localStorage.getItem('sw_players');
-  if(savedPlayers){
-    const parsed = JSON.parse(savedPlayers);
-    parsed.forEach(saved=>{
-      const p = PLAYERS.find(x=>x.name===saved.name);
-      if(p){ p.team=saved.team; p.role=saved.role; }
-    });
-  }
-  const s = localStorage.getItem('sw_user');
-  if(s){ me=JSON.parse(s); boot(); } else { buildOnboard(); }
+window.onload=()=>{
+  const savedPlayers=localStorage.getItem('sw_players');
+  if(savedPlayers){ const parsed=JSON.parse(savedPlayers); parsed.forEach(saved=>{ const p=PLAYERS.find(x=>x.name===saved.name); if(p){p.team=saved.team;p.role=saved.role;} }); }
+  const s=localStorage.getItem('sw_user');
+  if(s){me=JSON.parse(s);boot();}else{buildOnboard();}
+  document.addEventListener('click',e=>{ if(!e.target.classList.contains('cd')) document.querySelectorAll('.cal-tip').forEach(t=>t.remove()); });
 };
 
 function buildOnboard(){
-  document.getElementById('obgrid').innerHTML = PLAYERS.map(p=>`
+  document.getElementById('obgrid').innerHTML=PLAYERS.map(p=>`
     <div class="pbtn" onclick="choosePlayer('${p.name}')">
-      <div class="pname">${p.name}</div>
-      <div class="prole">${p.role}</div>
+      <div class="pname">${p.name}</div><div class="prole">${p.role}</div>
       <div class="pteam t${p.team}">Team ${p.team}</div>
     </div>`).join('');
 }
-
-function choosePlayer(name){
-  me = PLAYERS.find(p=>p.name===name);
-  localStorage.setItem('sw_user', JSON.stringify(me));
-  document.getElementById('ob').style.display='none';
-  boot();
-}
-
-function resetUser(){
-  if(!confirm('Switch user?')) return;
-  localStorage.removeItem('sw_user');
-  location.reload();
-}
+function choosePlayer(name){ me=PLAYERS.find(p=>p.name===name); localStorage.setItem('sw_user',JSON.stringify(me)); document.getElementById('ob').style.display='none'; boot(); }
+function resetUser(){ if(!confirm('Switch user?')) return; localStorage.removeItem('sw_user'); location.reload(); }
 
 function boot(){
   document.getElementById('ob').style.display='none';
   document.getElementById('app').classList.remove('hidden');
-
-  const p = PLAYERS.find(x=>x.name===me.name)||me;
-  const tc = p.team==='A'?'#dc2626':p.team==='B'?'#2563eb':'#16a34a';
-  const tbg = p.team==='A'?'#fee2e2':p.team==='B'?'#dbeafe':'#dcfce7';
-  const av = document.getElementById('navAv');
-  av.textContent = me.name[0];
-  av.style.background = tbg;
-  av.style.color = tc;
-  av.style.border = `2px solid ${tc}`;
-  document.getElementById('navNm').textContent = me.name;
-
+  const p=PLAYERS.find(x=>x.name===me.name)||me;
+  const tc=p.team==='A'?'#dc2626':p.team==='B'?'#2563eb':'#16a34a';
+  const tbg=p.team==='A'?'#fee2e2':p.team==='B'?'#dbeafe':'#dcfce7';
+  const av=document.getElementById('navAv');
+  av.textContent=me.name[0]; av.style.background=tbg; av.style.color=tc; av.style.border=`2px solid ${tc}`;
+  document.getElementById('navNm').textContent=me.name;
   const s=document.getElementById('aPlayer');
-  PLAYERS.forEach(p=>{ const o=document.createElement('option'); o.value=p.name; o.textContent=p.name; s.appendChild(o); });
-
-  renderAdminRoles();
-  subscribe();
-  renderHome();
+  PLAYERS.forEach(p=>{const o=document.createElement('option');o.value=p.name;o.textContent=p.name;s.appendChild(o);});
+  renderAdminRoles(); subscribe(); renderHome();
 }
 
-// ── FIRESTORE ──────────────────────────────────────────────────────────────
 function subscribe(){
-  db.collection('logs').where('month','==',MONTH).where('year','==',YEAR)
-    .onSnapshot(s=>{ allLogs=s.docs.map(d=>({id:d.id,...d.data()})); refresh(); });
-  db.collection('bonuses_30day').where('month','==',MONTH).where('year','==',YEAR)
-    .onSnapshot(s=>{ bonus30=s.docs.map(d=>({id:d.id,...d.data()})); refresh(); });
+  db.collection('logs').where('month','==',MONTH).where('year','==',YEAR).onSnapshot(s=>{allLogs=s.docs.map(d=>({id:d.id,...d.data()}));refresh();});
+  db.collection('bonuses_30day').where('month','==',MONTH).where('year','==',YEAR).onSnapshot(s=>{bonus30=s.docs.map(d=>({id:d.id,...d.data()}));refresh();});
 }
-
 function refresh(){ renderHome(); renderLB(); renderFeed(); }
 
 // ── SCORING ────────────────────────────────────────────────────────────────
 function score(playerName){
-  const p = PLAYERS.find(x=>x.name===playerName);
-  const logs = allLogs.filter(l=>l.player===playerName);
-  const days = new Set(logs.map(l=>l.day));
-  const wo = days.size;
-  const base = wo*2;
+  const p=PLAYERS.find(x=>x.name===playerName);
+  const logs=allLogs.filter(l=>l.player===playerName);
+  const days=new Set(logs.map(l=>l.day));
+  const wo=days.size;
+  const base=wo*5; // +5 per workout
 
   const today=new Date();
   const todayDay=today.getMonth()===MONTH&&today.getFullYear()===YEAR?today.getDate():DAYS;
   const checkUpTo=days.has(todayDay)?todayDay:todayDay-1;
   let cur=0;
-  for(let d=1;d<=checkUpTo;d++){
-    if(days.has(d)) cur++; else cur=0;
-  }
+  for(let d=1;d<=checkUpTo;d++){ if(days.has(d)) cur++; else cur=0; }
   const streak=cur;
   const sb=0;
 
+  // Perfect week +10
   const fullWeeks=[[4,10],[11,17],[18,24],[25,31]];
   let wb=0;
-  fullWeeks.forEach(([s,e])=>{
-    for(let d=s;d<=e;d++){ if(!days.has(d)) return; }
-    wb+=5;
-  });
+  fullWeeks.forEach(([s,e])=>{ for(let d=s;d<=e;d++){if(!days.has(d)) return;} wb+=10; });
 
   const isLastDay=today.getMonth()===MONTH&&today.getFullYear()===YEAR&&today.getDate()===31;
   const isAfterMonth=today.getMonth()>MONTH||today.getFullYear()>YEAR;
   let rb=0;
   if(isLastDay||isAfterMonth){
-    if(p.role==='Captain') rb=wo>=16?6:-6;
-    else if(p.role==='Vice Captain') rb=wo>=20?8:-5;
+    if(p.role==='Captain') rb=wo>=16?10:-10;
+    else if(p.role==='Vice Captain') rb=wo>=20?15:-10;
   }
 
+  // Team streak +1+2+3
   const teamLogs=allLogs.filter(l=>PLAYERS.find(x=>x.name===l.player&&x.team===p.team));
   const dc={};
-  teamLogs.forEach(l=>{ if(!dc[l.day]) dc[l.day]=new Set(); dc[l.day].add(l.player); });
-  let tb=0, teamStreak=0;
+  teamLogs.forEach(l=>{if(!dc[l.day]) dc[l.day]=new Set(); dc[l.day].add(l.player);});
+  let tb=0,teamStreak=0;
   for(let d=1;d<=DAYS;d++){
     const pt=dc[d]||new Set();
-    if(pt.size>=3){ teamStreak++; if(pt.has(playerName)) tb+=Math.min(3,teamStreak); }
-    else { teamStreak=0; }
+    if(pt.size>=3){teamStreak++;if(pt.has(playerName)) tb+=Math.min(3,teamStreak);}
+    else{teamStreak=0;}
   }
 
-  const b30=bonus30.find(b=>b.player===playerName)?20:0;
-  const pen=(isLastDay||isAfterMonth)&&wo<12?(wo-12)*2:0;
+  const b30=bonus30.find(b=>b.player===playerName)?50:0; // +50 for 30-day
+  const pen=(isLastDay||isAfterMonth)&&wo<12?(wo-12)*5:0; // -5 per missed below 12
   const total=base+sb+wb+rb+tb+b30+pen;
   return {wo,base,sb,wb,rb,tb,b30,pen,total,streak,days};
 }
 
-function teamTotal(team){
-  return PLAYERS.filter(p=>p.team===team).reduce((s,p)=>s+score(p.name).total,0);
-}
+function teamTotal(team){ return PLAYERS.filter(p=>p.team===team).reduce((s,p)=>s+score(p.name).total,0); }
 
 // ── HOME ───────────────────────────────────────────────────────────────────
 function renderHome(){
@@ -563,82 +481,48 @@ function renderHome(){
   const g=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
   document.getElementById('hGreet').textContent=`${g}, ${me.name} 👋`;
   document.getElementById('hDate').textContent=now.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-
   const sc=score(me.name);
   const pl=PLAYERS.find(p=>p.name===me.name)||me;
   const tc=pl.team==='A'?'#dc2626':pl.team==='B'?'#2563eb':'#16a34a';
 
-  // Daily fact
-  document.getElementById('factCard').innerHTML=`
-    <div class="fact-card">
-      <div class="fact-icon">🧠</div>
-      <div class="fact-text"><strong>Did you know?</strong> ${getDailyFact()}</div>
-    </div>`;
+  document.getElementById('factCard').innerHTML=`<div class="fact-card"><div class="fact-icon">🧠</div><div class="fact-text"><strong>Did you know?</strong> ${getDailyFact()}</div></div>`;
+  document.getElementById('heroCard').innerHTML=`<div class="hero" style="background:#1a1a2e"><div class="hero-stripe" style="background:${tc}"></div><div class="hero-label">Your points</div><div class="hero-pts">${sc.total}</div><div class="hero-sub">Rank #${getRank(me.name)} of ${PLAYERS.length} · Team ${pl.team}</div></div>`;
+  document.getElementById('nudgeCard').innerHTML=getNudgeHTML(me.name,sc);
 
-  // Hero card
-  document.getElementById('heroCard').innerHTML=`
-    <div class="hero" style="background:#1a1a2e">
-      <div class="hero-stripe" style="background:${tc}"></div>
-      <div class="hero-label">Your points</div>
-      <div class="hero-pts">${sc.total}</div>
-      <div class="hero-sub">Rank #${getRank(me.name)} of ${PLAYERS.length} · Team ${pl.team}</div>
-    </div>`;
-
-  // Nudge card
-  document.getElementById('nudgeCard').innerHTML=getNudgeHTML(me.name, sc);
-
-  // Streak card
   const smsg=getStreakMsg(sc.streak);
-  document.getElementById('streakCard').innerHTML=sc.streak>=2&&smsg?`
-    <div class="streak-card">
-      <div class="streak-num">${sc.streak} 🔥</div>
-      <div class="streak-msg">${smsg}</div>
-    </div>`:'';
+  document.getElementById('streakCard').innerHTML=sc.streak>=2&&smsg?`<div class="streak-card"><div class="streak-num">${sc.streak} 🔥</div><div class="streak-msg">${smsg}</div></div>`:'';
 
-  // Role bar
   let rHTML='';
   if(pl.role!=='Player'){
     const tgt=pl.role==='Captain'?16:20;
-    const bonus=pl.role==='Captain'?6:8;
-    const penalty=pl.role==='Captain'?6:5;
+    const bonus=pl.role==='Captain'?10:15;
+    const penalty=10;
     const pct=Math.min(100,Math.round(sc.wo/tgt*100));
     const ok=sc.wo>=tgt;
     const bc=ok?'var(--green)':pct>60?'var(--gold)':'var(--red)';
     const remaining=Math.max(0,tgt-sc.wo);
-    rHTML=`<div class="card">
-      <div class="row">
-        <div>
-          <div style="font-size:14px;font-weight:700">${pl.role} Target</div>
-          <div class="tmuted" style="font-size:12px">${sc.wo}/${tgt} workouts</div>
-        </div>
-        <div class="rbadge ${pl.role==='Captain'?'rCaptain':'rVC'}">${pl.role}</div>
-      </div>
-      <div class="pwrap"><div class="pbar" style="width:${pct}%;background:${bc}"></div></div>
-      ${ok
-        ?`<div class="warn-box warn-green" style="margin-top:10px;margin-bottom:0">✅ Target hit — +${bonus} pts will be added on May 31</div>`
-        :`<div class="warn-box warn-red" style="margin-top:10px;margin-bottom:0">⚠️ ${remaining} more workouts needed — missing target deducts ${penalty} pts on May 31</div>`
-      }
-    </div>`;
+    rHTML=`<div class="card"><div class="row"><div><div style="font-size:14px;font-weight:700">${pl.role} Target</div><div class="tmuted" style="font-size:12px">${sc.wo}/${tgt} workouts</div></div><div class="rbadge ${pl.role==='Captain'?'rCaptain':'rVC'}">${pl.role}</div></div><div class="pwrap"><div class="pbar" style="width:${pct}%;background:${bc}"></div></div>${ok?`<div class="warn-box warn-green" style="margin-top:10px;margin-bottom:0">✅ Target hit — +${bonus} pts will be added on May 31</div>`:`<div class="warn-box warn-red" style="margin-top:10px;margin-bottom:0">⚠️ ${remaining} more workouts needed — missing target deducts ${penalty} pts on May 31</div>`}</div>`;
   }
   if(sc.wo<12){
     const missing=12-sc.wo;
-    rHTML=`<div class="warn-box warn-orange">⚠️ You need ${missing} more workouts to avoid a <strong>${missing*2} pt deduction</strong> on May 31</div>`+rHTML;
+    rHTML=`<div class="warn-box warn-orange">⚠️ You need ${missing} more workouts to avoid a <strong>${missing*5} pt deduction</strong> on May 31</div>`+rHTML;
   }
   document.getElementById('roleBar').innerHTML=rHTML;
+  document.getElementById('hStats').innerHTML=`<div class="sc"><div class="sv">${sc.wo}</div><div class="sl">Workouts</div></div><div class="sc"><div class="sv" style="color:var(--orange)">${sc.streak} 🔥</div><div class="sl">Streak</div></div>`;
 
-  // Stats row
-  document.getElementById('hStats').innerHTML=`
-    <div class="sc"><div class="sv">${sc.wo}</div><div class="sl">Workouts</div></div>
-    <div class="sc"><div class="sv" style="color:var(--orange)">${sc.streak} 🔥</div><div class="sl">Streak</div></div>`;
-
-  // Calendar
+  // Calendar with tooltip
   const todayD=now.getMonth()===MONTH&&now.getFullYear()===YEAR?now.getDate():-1;
   const hdrs=['M','T','W','T','F','S','S'];
   let cal=hdrs.map(d=>`<div class="cdh">${d}</div>`).join('');
   for(let i=0;i<4;i++) cal+=`<div class="cd empty"></div>`;
   for(let d=1;d<=DAYS;d++){
-    const logged=sc.days.has(d), isToday=d===todayD;
-    cal+=`<div class="cd${logged?' logged':isToday?' today':''}">${d}</div>`;
+    const logged=sc.days.has(d),isToday=d===todayD;
+    if(logged){
+      const workoutsToday=[...new Set(allLogs.filter(l=>l.player===me.name&&l.day===d).flatMap(l=>l.workouts||[l.workout]).filter(Boolean))].join(', ');
+      cal+=`<div class="cd logged" onclick="showCalTip(this,'${workoutsToday.replace(/'/g,"&#39;")}')">${d}</div>`;
+    } else {
+      cal+=`<div class="cd${isToday?' today':''}">${d}</div>`;
+    }
   }
   document.getElementById('calGrid').innerHTML=cal;
 
@@ -646,39 +530,29 @@ function renderHome(){
   const team=pl.team;
   const teamLogs=allLogs.filter(l=>PLAYERS.find(p=>p.name===l.player&&p.team===team));
   const dc={};
-  teamLogs.forEach(l=>{ if(!dc[l.day]) dc[l.day]=new Set(); dc[l.day].add(l.player); });
+  teamLogs.forEach(l=>{if(!dc[l.day]) dc[l.day]=new Set(); dc[l.day].add(l.player);});
   const bonusDays=Object.entries(dc).filter(([d,ps])=>ps.size>=3).map(([d])=>+d).sort((a,b)=>a-b);
-  document.getElementById('teamStreakCard').innerHTML=`
-    <div class="card-title">Team ${team} qualifying streak days</div>
-    ${bonusDays.length===0
-      ?'<div class="tmuted">No qualifying days yet. Get 3+ teammates to log on the same day!</div>'
-      :bonusDays.map(d=>`<div class="row" style="padding:6px 0;border-bottom:1px solid var(--border)">
-          <span style="font-size:13px">May ${d} — ${dc[d].size} members</span>
-          <span style="font-size:11px;color:var(--green);font-weight:600">✅ Streak bonus</span>
-        </div>`).join('')
-    }`;
+  document.getElementById('teamStreakCard').innerHTML=`<div class="card-title">Team ${team} qualifying streak days</div>${bonusDays.length===0?'<div class="tmuted">No qualifying days yet. Get 3+ teammates to log on the same day!</div>':bonusDays.map(d=>`<div class="row" style="padding:6px 0;border-bottom:1px solid var(--border)"><span style="font-size:13px">May ${d} — ${dc[d].size} members</span><span style="font-size:11px;color:var(--green);font-weight:600">✅ Streak bonus</span></div>`).join('')}`;
 }
 
-function getRank(playerName){
-  const sorted=PLAYERS.map(p=>({name:p.name,pts:score(p.name).total})).sort((a,b)=>b.pts-a.pts);
-  return sorted.findIndex(p=>p.name===playerName)+1;
+function showCalTip(el,text){
+  document.querySelectorAll('.cal-tip').forEach(t=>t.remove());
+  const tip=document.createElement('div');
+  tip.className='cal-tip'; tip.textContent=text;
+  el.appendChild(tip);
+  setTimeout(()=>tip.remove(),2500);
 }
 
-function getNudgeHTML(playerName, sc){
+function getRank(playerName){ const sorted=PLAYERS.map(p=>({name:p.name,pts:score(p.name).total})).sort((a,b)=>b.pts-a.pts); return sorted.findIndex(p=>p.name===playerName)+1; }
+
+function getNudgeHTML(playerName,sc){
   const sorted=PLAYERS.map(p=>({name:p.name,pts:score(p.name).total})).sort((a,b)=>b.pts-a.pts);
   const myIdx=sorted.findIndex(p=>p.name===playerName);
   const myPts=sorted[myIdx].pts;
-
-  if(myIdx===0){
-    if(sorted.length>1){
-      const gap=myPts-sorted[1].pts;
-      return `<div class="nudge"><div class="nudge-icon">👑</div><div class="nudge-text">You're leading the pack. <strong>${sorted[1].name}</strong> is ${gap} pts behind. Don't get comfortable.</div></div>`;
-    }
-    return '';
-  }
+  if(myIdx===0){ const gap=myPts-(sorted[1]?.pts||0); return `<div class="nudge"><div class="nudge-icon">👑</div><div class="nudge-text">You're leading the pack. <strong>${sorted[1]?.name}</strong> is ${gap} pts behind. Don't get comfortable.</div></div>`; }
   const ahead=sorted[myIdx-1];
   const gap=ahead.pts-myPts;
-  const needed=Math.ceil(gap/2);
+  const needed=Math.ceil(gap/5);
   return `<div class="nudge"><div class="nudge-icon">⚡</div><div class="nudge-text">You're <strong>${gap} pts behind ${ahead.name}</strong>. ${needed} workout${needed>1?'s':''} and you overtake them.</div></div>`;
 }
 
@@ -686,16 +560,17 @@ function getNudgeHTML(playerName, sc){
 function pickDay(t){
   if(t==='today'){
     const now=new Date();
-    if(now.getMonth()!==MONTH||now.getFullYear()!==YEAR){ alert('Today is not in May 2026'); return; }
+    if(now.getMonth()!==MONTH||now.getFullYear()!==YEAR){alert('Today is not in May 2026');return;}
     selDay=now.getDate();
   }
   goS2();
 }
-function showPicker(){ document.getElementById('pickerWrap').classList.remove('hidden'); }
-function pickDayFromInput(){
-  const v=document.getElementById('dpick').value; if(!v) return;
-  selDay=new Date(v).getDate(); goS2();
+function showPicker(){
+  document.getElementById('pickerWrap').classList.remove('hidden');
+  const dp=document.getElementById('dpick');
+  dp.min=`${YEAR}-05-01`; dp.max=`${YEAR}-05-31`;
 }
+function pickDayFromInput(){ const v=document.getElementById('dpick').value; if(!v) return; selDay=new Date(v).getDate(); goS2(); }
 function goS2(){
   document.getElementById('ls1').classList.add('hidden');
   document.getElementById('ls2').classList.remove('hidden');
@@ -713,126 +588,51 @@ function buildChips(){
     return `<div class="chip ${cls}" id="chip_${i}" onclick="toggleChip(this,'chip_${i}','${w.replace(/'/g,"\\'")}')">${w}</div>`;
   }).join('');
 }
-function toggleChip(el,chipId,w){
-  el.classList.toggle('sel');
-  if(el.classList.contains('sel')){ if(!selW.includes(w)) selW.push(w); }
-  else { selW=selW.filter(x=>x!==w); }
-  updateSel(); updBtn();
-}
-function addCustom(){
-  const inp=document.getElementById('custInp'); const v=inp.value.trim(); if(!v) return;
-  if(!selW.includes(v)) selW.push(v);
-  inp.value=''; updateSel(); updBtn();
-}
-function updateSel(){
-  const w=document.getElementById('selPrev'),l=document.getElementById('selList');
-  if(selW.length===0){w.classList.add('hidden');return;}
-  w.classList.remove('hidden'); l.textContent=selW.join(' · ');
-}
+function toggleChip(el,chipId,w){ el.classList.toggle('sel'); if(el.classList.contains('sel')){if(!selW.includes(w)) selW.push(w);}else{selW=selW.filter(x=>x!==w);} updateSel(); updBtn(); }
+function addCustom(){ const inp=document.getElementById('custInp'); const v=inp.value.trim(); if(!v) return; if(!selW.includes(v)) selW.push(v); inp.value=''; updateSel(); updBtn(); }
+function updateSel(){ const w=document.getElementById('selPrev'),l=document.getElementById('selList'); if(selW.length===0){w.classList.add('hidden');return;} w.classList.remove('hidden'); l.textContent=selW.join(' · '); }
 function updBtn(){ document.getElementById('subBtn').disabled=selW.length===0; }
 
 async function submitLog(){
   const btn=document.getElementById('subBtn');
   btn.disabled=true; btn.textContent='Saving...';
   try{
-    await db.collection('logs').add({
-      player:me.name, team:me.team, role:me.role,
-      workouts:selW, day:selDay, month:MONTH, year:YEAR,
-      timestamp:firebase.firestore.FieldValue.serverTimestamp()
-    });
+    await db.collection('logs').add({player:me.name,team:me.team,role:me.role,workouts:selW,day:selDay,month:MONTH,year:YEAR,timestamp:firebase.firestore.FieldValue.serverTimestamp()});
     const sc=score(me.name);
-
-    // Check if comeback (gap of 2+ days before this log)
     const myDays=[...allLogs.filter(l=>l.player===me.name).map(l=>l.day)].sort((a,b)=>a-b);
     const lastDay=myDays.length>=2?myDays[myDays.length-2]:null;
     const isComeback=lastDay&&(selDay-lastDay)>=3;
-
     document.getElementById('ls2').classList.add('hidden');
     document.getElementById('ls3').classList.remove('hidden');
-    document.getElementById('succTitle').textContent = isComeback ? 'Welcome Back!' : 'Workout Logged!';
+    document.getElementById('succTitle').textContent=isComeback?'Welcome Back!':'Workout Logged!';
     document.getElementById('succSub').textContent=`${selW.join(', ')} · May ${selDay}`;
-
     const cbMsg=document.getElementById('comebackMsg');
-    if(isComeback){ cbMsg.textContent=getRandomComeback(); cbMsg.classList.remove('hidden'); }
-    else { cbMsg.classList.add('hidden'); }
-
-    document.getElementById('succStats').innerHTML=`
-      <div class="srow" style="margin-bottom:0">
-        <div class="sc"><div class="sv">${sc.total}</div><div class="sl">Points</div></div>
-        <div class="sc"><div class="sv">${sc.wo}</div><div class="sl">Workouts</div></div>
-        <div class="sc" style="grid-column:1/-1"><div class="sv" style="color:var(--orange)">${sc.streak} 🔥</div><div class="sl">Streak</div></div>
-      </div>`;
-  } catch(e){ alert('Error saving. Check connection.'); btn.disabled=false; btn.textContent='Log Workout'; }
+    if(isComeback){cbMsg.textContent=getRandomComeback();cbMsg.classList.remove('hidden');}else{cbMsg.classList.add('hidden');}
+    document.getElementById('succStats').innerHTML=`<div class="srow" style="margin-bottom:0"><div class="sc"><div class="sv">${sc.total}</div><div class="sl">Points</div></div><div class="sc"><div class="sv">${sc.wo}</div><div class="sl">Workouts</div></div><div class="sc" style="grid-column:1/-1"><div class="sv" style="color:var(--orange)">${sc.streak} 🔥</div><div class="sl">Streak</div></div></div>`;
+  }catch(e){alert('Error saving. Check connection.');btn.disabled=false;btn.textContent='Log Workout';}
 }
-
-function resetLog(){
-  selDay=null; selW=[];
-  ['ls1','ls2','ls3'].forEach((id,i)=>document.getElementById(id).classList[i===0?'remove':'add']('hidden'));
-  document.getElementById('pickerWrap').classList.add('hidden');
-  showTab('home');
-}
-function backToS1(){
-  document.getElementById('ls1').classList.remove('hidden');
-  document.getElementById('ls2').classList.add('hidden');
-}
+function resetLog(){ selDay=null; selW=[]; ['ls1','ls2','ls3'].forEach((id,i)=>document.getElementById(id).classList[i===0?'remove':'add']('hidden')); document.getElementById('pickerWrap').classList.add('hidden'); showTab('home'); }
+function backToS1(){ document.getElementById('ls1').classList.remove('hidden'); document.getElementById('ls2').classList.add('hidden'); }
 
 // ── LEADERBOARD ────────────────────────────────────────────────────────────
 function renderLB(){
   const ts=['A','B','C'].map(t=>({t,s:teamTotal(t)})).sort((a,b)=>b.s-a.s);
   const tcol=t=>t==='A'?'var(--A)':t==='B'?'var(--B)':'var(--C)';
-  document.getElementById('teamStand').innerHTML=ts.map((t,i)=>`
-    <div class="tcard ${t.t}">
-      <div>
-        <div class="tcname">#${i+1} Team ${t.t}</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:3px">${PLAYERS.filter(p=>p.team===t.t).map(p=>p.name).join(', ')}</div>
-      </div>
-      <div style="text-align:right">
-        <div style="font-size:28px;font-weight:900;color:${t.t==='A'?'var(--A)':t.t==='B'?'var(--B)':'var(--C)'}">${t.s}</div>
-        <div style="font-size:10px;color:var(--muted)">pts</div>
-      </div>
-    </div>`).join('');
-
+  document.getElementById('teamStand').innerHTML=ts.map((t,i)=>`<div class="tcard ${t.t}"><div><div class="tcname">#${i+1} Team ${t.t}</div><div style="font-size:11px;color:var(--muted);margin-top:3px">${PLAYERS.filter(p=>p.team===t.t).map(p=>p.name).join(', ')}</div></div><div style="text-align:right"><div style="font-size:28px;font-weight:900;color:${t.t==='A'?'var(--A)':t.t==='B'?'var(--B)':'var(--C)'}">${t.s}</div><div style="font-size:10px;color:var(--muted)">pts</div></div></div>`).join('');
   const ind=PLAYERS.map(p=>({...p,sc:score(p.name)})).sort((a,b)=>b.sc.total-a.sc.total);
   document.getElementById('indLb').innerHTML=ind.map((p,i)=>{
-    const tc=tcol(p.team);
-    const tbg=p.team==='A'?'var(--Al)':p.team==='B'?'var(--Bl)':'var(--Cl)';
-    const isMe=p.name===me.name;
-    return `<div class="lbrow${i===0?' top1':''}${isMe?' ':''}" style="${isMe?'background:#f0fdf4;margin:0 -16px;padding:12px 16px;border-radius:8px':''}">
-      <div class="lbrank ${i===0?'r1':i===1?'r2':i===2?'r3':''}">${i+1}</div>
-      <div style="width:34px;height:34px;border-radius:50%;background:${tbg};border:2px solid ${tc};display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:${tc};flex-shrink:0">${p.name[0]}</div>
-      <div class="lbinfo">
-        <div class="lbname">${p.name}${isMe?' <span style="font-size:10px;color:var(--green);font-weight:700">· you</span>':''} <span class="rbadge ${p.role==='Captain'?'rCaptain':p.role==='Vice Captain'?'rVC':'rPlayer'}">${p.role}</span></div>
-        <div class="lbmeta">${p.sc.wo} workouts · ${p.sc.streak}🔥</div>
-      </div>
-      <div style="text-align:right">
-        <div style="font-size:20px;font-weight:800;color:var(--text)">${p.sc.total}</div>
-        <div style="font-size:10px;color:var(--muted)">pts</div>
-      </div>
-    </div>`;
+    const tc=tcol(p.team); const tbg=p.team==='A'?'var(--Al)':p.team==='B'?'var(--Bl)':'var(--Cl)'; const isMe=p.name===me.name;
+    return `<div class="lbrow${i===0?' top1':''}" style="${isMe?'background:#f0fdf4;margin:0 -16px;padding:12px 16px;border-radius:8px':''}"><div class="lbrank ${i===0?'r1':i===1?'r2':i===2?'r3':''}">${i+1}</div><div style="width:34px;height:34px;border-radius:50%;background:${tbg};border:2px solid ${tc};display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:${tc};flex-shrink:0">${p.name[0]}</div><div class="lbinfo"><div class="lbname">${p.name}${isMe?' <span style="font-size:10px;color:var(--green);font-weight:700">· you</span>':''} <span class="rbadge ${p.role==='Captain'?'rCaptain':p.role==='Vice Captain'?'rVC':'rPlayer'}">${p.role}</span></div><div class="lbmeta">${p.sc.wo} workouts · ${p.sc.streak}🔥</div></div><div style="text-align:right"><div style="font-size:20px;font-weight:800;color:var(--text)">${p.sc.total}</div><div style="font-size:10px;color:var(--muted)">pts</div></div></div>`;
   }).join('');
-
   const my=score(me.name);
-  document.getElementById('ptsBk').innerHTML=`
-    <div class="card-title">Your breakdown</div>
-    ${[
-      ['Base points',my.base,`${my.wo} workouts × 2`],
-      ['Perfect week',my.wb,'+5 per full Mon–Sun week'],
-      ['Role bonus',my.rb,ROLE_DESC[PLAYERS.find(p=>p.name===me.name).role].split('→')[0]],
-      ['Team streak',my.tb,'Cumulative team streak bonus'],
-      ['30-day bonus',my.b30,'All 31 days logged'],
-      ['Penalty',my.pen,'Applied May 31 if <12 workouts'],
-    ].map(([l,v,s])=>`
-      <div class="row" style="padding:8px 0;border-bottom:1px solid var(--border)">
-        <div>
-          <div style="font-size:13px;font-weight:500">${l}</div>
-          <div style="font-size:11px;color:var(--muted)">${s}</div>
-        </div>
-        <div style="font-size:15px;font-weight:800;color:${v<0?'var(--red)':v>0?'var(--green)':'var(--muted)'}">${v>0?'+':''}${v}</div>
-      </div>`).join('')}
-    <div class="row" style="padding:12px 0 0">
-      <div style="font-size:15px;font-weight:700">Total</div>
-      <div style="font-size:26px;font-weight:900;color:var(--text)">${my.total}</div>
-    </div>`;
+  document.getElementById('ptsBk').innerHTML=`<div class="card-title">Your breakdown</div>${[
+    ['Base points',my.base,`${my.wo} workouts × 5`],
+    ['Perfect week',my.wb,'+10 per full Mon–Sun week'],
+    ['Role bonus',my.rb,ROLE_DESC[PLAYERS.find(p=>p.name===me.name).role].split('→')[0]],
+    ['Team streak',my.tb,'Cumulative team streak bonus (+1/+2/+3)'],
+    ['30-day bonus',my.b30,'All 31 days logged'],
+    ['Penalty',my.pen,'Applied May 31 — -5 per workout below 12'],
+  ].map(([l,v,s])=>`<div class="row" style="padding:8px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:13px;font-weight:500">${l}</div><div style="font-size:11px;color:var(--muted)">${s}</div></div><div style="font-size:15px;font-weight:800;color:${v<0?'var(--red)':v>0?'var(--green)':'var(--muted)'}">${v>0?'+':''}${v}</div></div>`).join('')}<div class="row" style="padding:12px 0 0"><div style="font-size:15px;font-weight:700">Total</div><div style="font-size:26px;font-weight:900;color:var(--text)">${my.total}</div></div>`;
 }
 
 // ── FEED ───────────────────────────────────────────────────────────────────
@@ -840,31 +640,48 @@ function renderFeed(){
   const sorted=[...allLogs].sort((a,b)=>(b.timestamp?.seconds||0)-(a.timestamp?.seconds||0));
   const tcol=t=>t==='A'?'var(--A)':t==='B'?'var(--B)':'var(--C)';
   const tbg=t=>t==='A'?'var(--Al)':t==='B'?'var(--Bl)':'var(--Cl)';
+
+  // Feed stats
+  const now=new Date();
+  const todayDay=now.getMonth()===MONTH&&now.getFullYear()===YEAR?now.getDate():-1;
+  const todayLogs=allLogs.filter(l=>l.day===todayDay);
+  const todayPlayers=new Set(todayLogs.map(l=>l.player));
+  const todayCount=todayPlayers.size;
+  const teamCounts={A:0,B:0,C:0};
+  todayPlayers.forEach(name=>{ const p=PLAYERS.find(x=>x.name===name); if(p) teamCounts[p.team]++; });
+  const topTeamEntry=Object.entries(teamCounts).sort((a,b)=>b[1]-a[1])[0];
+  const topTeam=topTeamEntry[1]>0?topTeamEntry[0]:null;
+  const topStreaker=PLAYERS.map(p=>({name:p.name,streak:score(p.name).streak})).filter(p=>p.streak>0).sort((a,b)=>b.streak-a.streak)[0];
+
+  let statsHTML=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border)">
+    <div style="background:var(--green-l);border-radius:10px;padding:12px;text-align:center">
+      <div style="font-size:26px;font-weight:900;color:var(--green)">${todayCount}<span style="font-size:13px;font-weight:500;color:var(--green)">/${PLAYERS.length}</span></div>
+      <div style="font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.5px;margin-top:2px">Logged today</div>
+    </div>
+    <div style="background:${topTeam?tbg(topTeam):'#f3f4f6'};border-radius:10px;padding:12px;text-align:center">
+      <div style="font-size:26px;font-weight:900;color:${topTeam?tcol(topTeam):'var(--muted)'}">${topTeam?'Team '+topTeam:'—'}</div>
+      <div style="font-size:10px;font-weight:700;color:${topTeam?tcol(topTeam):'var(--muted)'};text-transform:uppercase;letter-spacing:.5px;margin-top:2px">Leading today</div>
+    </div>
+    ${topStreaker?`<div style="background:var(--gold-l);border-radius:10px;padding:12px;text-align:center;grid-column:1/-1">
+      <div style="font-size:18px;font-weight:800;color:var(--orange)">${topStreaker.name} · ${topStreaker.streak} days 🔥</div>
+      <div style="font-size:10px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.5px;margin-top:2px">Longest active streak</div>
+    </div>`:''}
+  </div>`;
+
   if(sorted.length===0){
-    document.getElementById('feedList').innerHTML='<div class="tmuted">No workouts yet. Be the first! 💪</div>'; return;
+    document.getElementById('feedList').innerHTML=statsHTML+'<div class="tmuted">No workouts yet. Be the first! 💪</div>'; return;
   }
-  document.getElementById('feedList').innerHTML=sorted.slice(0,60).map(l=>{
+  document.getElementById('feedList').innerHTML=statsHTML+sorted.slice(0,60).map(l=>{
     const w=Array.isArray(l.workouts)?l.workouts.join(', '):(l.workout||'');
     const ts=l.timestamp?.seconds?new Date(l.timestamp.seconds*1000):null;
     const tstr=ts?ts.toLocaleDateString('en-IN',{day:'numeric',month:'short'})+' · '+ts.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}):`May ${l.day}`;
     const isMine=l.player===me.name;
-    const ct = (PLAYERS.find(x=>x.name===l.player)||{team:l.team}).team;
-    return `<div class="fi">
-      <div class="fav" style="background:${tbg(ct)};color:${tcol(ct)};border:2px solid ${tcol(ct)}">${l.player[0]}</div>
-      <div class="ftxt">
-        <div class="fn">${l.player} <span style="font-size:10px;color:${tcol(ct)};font-weight:700">Team ${ct}</span></div>
-        <div class="fw">💪 ${w}</div>
-        <div class="ft">${tstr}</div>
-      </div>
-      ${isMine?`<button onclick="deleteLog('${l.id}')" style="background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;padding:4px 8px;flex-shrink:0">×</button>`:''}
-    </div>`;
+    const ct=(PLAYERS.find(x=>x.name===l.player)||{team:l.team}).team;
+    return `<div class="fi"><div class="fav" style="background:${tbg(ct)};color:${tcol(ct)};border:2px solid ${tcol(ct)}">${l.player[0]}</div><div class="ftxt"><div class="fn">${l.player} <span style="font-size:10px;color:${tcol(ct)};font-weight:700">Team ${ct}</span></div><div class="fw">💪 ${w}</div><div class="ft">${tstr}</div></div>${isMine?`<button onclick="deleteLog('${l.id}')" style="background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;padding:4px 8px;flex-shrink:0">×</button>`:''}</div>`;
   }).join('');
 }
 
-async function deleteLog(id){
-  if(!confirm('Delete this workout entry?')) return;
-  await db.collection('logs').doc(id).delete();
-}
+async function deleteLog(id){ if(!confirm('Delete this workout entry?')) return; await db.collection('logs').doc(id).delete(); }
 
 // ── ADMIN ──────────────────────────────────────────────────────────────────
 async function award30(){
@@ -872,49 +689,26 @@ async function award30(){
   if(!p){alert('Select player');return;}
   if(bonus30.find(b=>b.player===p)){alert('Already awarded');return;}
   await db.collection('bonuses_30day').add({player:p,month:MONTH,year:YEAR});
-  alert(`✅ +20 pts awarded to ${p}`);
+  alert(`✅ +50 pts awarded to ${p}`);
 }
 function renderAdminRoles(){
-  document.getElementById('adminRoles').innerHTML=PLAYERS.map(p=>`
-    <div style="display:grid;grid-template-columns:1fr 80px 130px;gap:6px;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)">
-      <span style="font-size:13px;font-weight:700">${p.name}</span>
-      <select id="team_${p.name}" style="padding:6px;font-size:12px;margin-bottom:0">
-        <option value="A"${p.team==='A'?' selected':''}>Team A</option>
-        <option value="B"${p.team==='B'?' selected':''}>Team B</option>
-        <option value="C"${p.team==='C'?' selected':''}>Team C</option>
-      </select>
-      <select id="role_${p.name}" style="padding:6px;font-size:12px;margin-bottom:0">
-        ${['Player','Vice Captain','Captain'].map(r=>`<option value="${r}"${p.role===r?' selected':''}>${r}</option>`).join('')}
-      </select>
-    </div>`).join('');
+  document.getElementById('adminRoles').innerHTML=PLAYERS.map(p=>`<div style="display:grid;grid-template-columns:1fr 80px 130px;gap:6px;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)"><span style="font-size:13px;font-weight:700">${p.name}</span><select id="team_${p.name}" style="padding:6px;font-size:12px;margin-bottom:0"><option value="A"${p.team==='A'?' selected':''}>Team A</option><option value="B"${p.team==='B'?' selected':''}>Team B</option><option value="C"${p.team==='C'?' selected':''}>Team C</option></select><select id="role_${p.name}" style="padding:6px;font-size:12px;margin-bottom:0">${['Player','Vice Captain','Captain'].map(r=>`<option value="${r}"${p.role===r?' selected':''}>${r}</option>`).join('')}</select></div>`).join('');
 }
 function saveRoles(){
-  PLAYERS.forEach(p=>{
-    const t=document.getElementById(`team_${p.name}`)?.value;
-    const r=document.getElementById(`role_${p.name}`)?.value;
-    if(t) p.team=t;
-    if(r) p.role=r;
-  });
+  PLAYERS.forEach(p=>{ const t=document.getElementById(`team_${p.name}`)?.value; const r=document.getElementById(`role_${p.name}`)?.value; if(t) p.team=t; if(r) p.role=r; });
   const fresh=PLAYERS.find(p=>p.name===me.name);
   if(fresh){me.team=fresh.team;me.role=fresh.role;}
   localStorage.setItem('sw_user',JSON.stringify(me));
   localStorage.setItem('sw_players',JSON.stringify(PLAYERS));
-  renderAdminRoles();
-  refresh();
+  renderAdminRoles(); refresh();
   alert('✅ Teams and roles updated!');
 }
 
-// ── TABS ───────────────────────────────────────────────────────────────────
 const TABS=['home','log','lb','feed','admin'];
 const ADMIN_PIN='9090';
 let adminUnlocked=false;
-
 function showTab(t){
-  if(t==='admin'&&!adminUnlocked){
-    const pin=prompt('Enter admin PIN:');
-    if(pin!==ADMIN_PIN){alert('Wrong PIN');return;}
-    adminUnlocked=true;
-  }
+  if(t==='admin'&&!adminUnlocked){ const pin=prompt('Enter admin PIN:'); if(pin!==ADMIN_PIN){alert('Wrong PIN');return;} adminUnlocked=true; }
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
   document.getElementById(`page-${t}`).classList.add('active');
