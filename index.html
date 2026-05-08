@@ -665,8 +665,8 @@ function renderFeed(){
       <div style="font-size:10px;font-weight:700;color:${topTeam?tcol(topTeam):'var(--muted)'};text-transform:uppercase;letter-spacing:.5px;margin-top:2px">Leading today</div>
     </div>
     ${topStreakers.length>0?`<div style="background:var(--gold-l);border-radius:10px;padding:12px;text-align:center;grid-column:1/-1">
-      <div style="font-size:18px;font-weight:800;color:var(--orange)">${topStreakers.map(p=>p.name).join(' · ')} · ${topStreak} days 🔥</div>
-      <div style="font-size:10px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.5px;margin-top:2px">Longest active streak</div>
+      <div style="font-size:18px;font-weight:800;color:var(--orange)">${topStreakers.length<=3?topStreakers.map(p=>p.name).join(' · ')+' · '+topStreak+' days 🔥':'Multiple players · '+topStreak+' days 🔥'}</div>
+      <div style="font-size:10px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.5px;margin-top:2px">${topStreakers.length<=3?'Longest active streak':topStreakers.length+' players tied — check the board'}</div>
     </div>`:''}
   </div>`;
 
@@ -679,7 +679,7 @@ function renderFeed(){
     const tstr=ts?ts.toLocaleDateString('en-IN',{day:'numeric',month:'short'})+' · '+ts.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}):`May ${l.day}`;
     const isMine=l.player===me.name;
     const ct=(PLAYERS.find(x=>x.name===l.player)||{team:l.team}).team;
-    return `<div class="fi"><div class="fav" style="background:${tbg(ct)};color:${tcol(ct)};border:2px solid ${tcol(ct)}">${l.player[0]}</div><div class="ftxt"><div class="fn">${l.player} <span style="font-size:10px;color:${tcol(ct)};font-weight:700">Team ${ct}</span></div><div class="fw">💪 ${w}</div><div class="ft">${tstr}${l.day!==todayDay?' <span style="background:var(--orange-l);color:var(--orange);font-size:9px;font-weight:700;padding:1px 5px;border-radius:4px;margin-left:4px">backlog</span>':''}</div></div>${isMine?`<button onclick="deleteLog('${l.id}')" style="background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;padding:4px 8px;flex-shrink:0">×</button>`:''}</div>`;
+    return `<div class="fi"><div class="fav" style="background:${tbg(ct)};color:${tcol(ct)};border:2px solid ${tcol(ct)}">${l.player[0]}</div><div class="ftxt"><div class="fn">${l.player} <span style="font-size:10px;color:${tcol(ct)};font-weight:700">Team ${ct}</span></div><div class="fw">💪 ${w}</div><div class="ft">${tstr} · <span style="font-size:10px;color:var(--muted)">for May ${l.day}</span>${l.day<todayDay&&ts&&ts.toDateString()===now.toDateString()?' <span style="background:var(--orange-l);color:var(--orange);font-size:9px;font-weight:700;padding:1px 5px;border-radius:4px;margin-left:4px">backlog</span>':''}</div></div></div>${isMine?`<button onclick="deleteLog('${l.id}')" style="background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;padding:4px 8px;flex-shrink:0">×</button>`:''}</div>`;
   }).join('');
 }
 
