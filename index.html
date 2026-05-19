@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Squad Wars</title>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <style>
 :root {
   --bg:#f5f5f7;--surface:#ffffff;--card:#ffffff;--border:rgba(0,0,0,0.08);
@@ -33,6 +34,8 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .btn-dark{background:var(--text);color:#ffffff}
 .btn-surface{background:var(--surface);color:var(--text);border:1px solid var(--border)}
 .btn-green{background:var(--green);color:#fff}
+.btn-purple{background:var(--purple);color:#fff}
+.btn-gold{background:var(--gold);color:#000}
 .btn-sm{padding:8px 14px;font-size:12px;width:auto;display:inline-block;border-radius:8px;margin-bottom:0}
 input,select{background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:15px;padding:12px 14px;width:100%;outline:none;font-family:inherit;margin-bottom:8px}
 input:focus,select:focus{border-color:var(--text)}
@@ -118,9 +121,43 @@ input::placeholder{color:var(--muted)}
 .warn-green{background:var(--green-l);border:1px solid var(--green);color:var(--green)}
 .warn-red{background:var(--red-l);border:1px solid var(--red);color:var(--red)}
 .warn-orange{background:var(--orange-l);border:1px solid var(--orange);color:var(--orange)}
-/* date picker trigger */
-.date-trigger{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 14px;width:100%;font-size:15px;color:var(--muted);cursor:pointer;margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.date-trigger span{font-size:16px}
+
+/* ── REPORT CARD STYLES ── */
+#reportModal{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;display:flex;flex-direction:column;align-items:center;overflow-y:auto;padding:20px 16px}
+#reportModal.hidden{display:none!important}
+.report-actions{display:flex;gap:10px;margin-bottom:16px;width:100%;max-width:390px}
+.report-card{width:390px;max-width:100%;border-radius:20px;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;position:relative}
+.rc-header{padding:28px 24px 20px;position:relative}
+.rc-month{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.7;margin-bottom:8px}
+.rc-name{font-size:44px;font-weight:900;line-height:1;margin-bottom:6px}
+.rc-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;background:rgba(255,255,255,0.15);font-size:12px;font-weight:700;margin-bottom:4px}
+.rc-team{font-size:12px;font-weight:600;opacity:.7;margin-top:6px}
+.rc-hero{padding:24px;text-align:center;background:rgba(0,0,0,0.2)}
+.rc-hero-num{font-size:80px;font-weight:900;line-height:1;color:#fff}
+.rc-hero-label{font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;opacity:.7;margin-top:4px}
+.rc-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;background:rgba(0,0,0,0.15)}
+.rc-stat{padding:14px 8px;text-align:center;background:rgba(0,0,0,0.1)}
+.rc-stat-v{font-size:22px;font-weight:900;color:#fff}
+.rc-stat-l{font-size:9px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;opacity:.6;margin-top:2px;color:#fff}
+.rc-para{padding:20px 24px;background:rgba(0,0,0,0.2);font-size:14px;line-height:1.7;color:rgba(255,255,255,0.9);font-style:italic}
+.rc-pills{padding:16px 24px;display:flex;flex-wrap:wrap;gap:8px;background:rgba(0,0,0,0.1)}
+.rc-pill{padding:6px 12px;border-radius:20px;background:rgba(255,255,255,0.12);font-size:11px;font-weight:600;color:#fff}
+.rc-closing{padding:20px 24px 16px;text-align:center;background:rgba(0,0,0,0.2)}
+.rc-closing-text{font-size:16px;font-weight:800;color:#fff;line-height:1.4}
+.rc-footer{padding:14px 24px;display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,0.3)}
+.rc-footer-brand{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;opacity:.5;color:#fff}
+
+/* team card */
+.rc-team-header{padding:28px 24px 20px}
+.rc-team-name{font-size:48px;font-weight:900;line-height:1;color:#fff}
+.rc-team-result{font-size:18px;font-weight:700;opacity:.8;color:#fff;margin-top:6px}
+.rc-team-members{display:flex;flex-wrap:wrap;gap:8px;padding:16px 24px;background:rgba(0,0,0,0.15)}
+.rc-member{padding:6px 14px;border-radius:20px;background:rgba(255,255,255,0.15);font-size:12px;font-weight:700;color:#fff}
+.rc-team-stats{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(0,0,0,0.15)}
+.rc-team-stat{padding:16px;text-align:center;background:rgba(0,0,0,0.1)}
+.rc-team-stat-v{font-size:28px;font-weight:900;color:#fff}
+.rc-team-stat-l{font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;opacity:.6;margin-top:2px;color:#fff}
+.rc-team-para{padding:20px 24px;background:rgba(0,0,0,0.2);font-size:14px;line-height:1.7;color:rgba(255,255,255,0.9);font-style:italic}
 </style>
 </head>
 <body>
@@ -176,11 +213,8 @@ input::placeholder{color:var(--muted)}
       <button class="btn btn-dark" onclick="pickDay('today')">Today</button>
       <button class="btn btn-surface" onclick="showPicker()">Another day</button>
       <div id="pickerWrap" class="hidden" style="margin-top:4px">
-        <input type="date" id="dpick" onchange="pickDayFromInput()" 
-          min="2026-05-01" max="2026-05-31"
-          style="background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:15px;padding:13px 14px;width:100%;outline:none;font-family:inherit;margin-bottom:8px;cursor:pointer">
+        <input type="date" id="dpick" onchange="pickDayFromInput()" min="2026-05-01" max="2026-05-31" style="background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:15px;padding:13px 14px;width:100%;outline:none;font-family:inherit;margin-bottom:8px;cursor:pointer">
       </div>
-
     </div>
     <div id="ls2" class="hidden">
       <div class="row" style="margin-bottom:16px">
@@ -233,28 +267,37 @@ input::placeholder{color:var(--muted)}
   <div class="page" id="page-admin">
     <div style="padding:8px 0 4px;font-size:20px;font-weight:800">Admin</div>
     <div style="font-size:12px;color:var(--muted);margin-bottom:16px">Only you should use this page</div>
+
+    <!-- REPORT PREVIEW SECTION -->
+    <div class="card" style="border:2px solid var(--purple)">
+      <div class="card-title" style="color:var(--purple)">📊 Monthly Report Cards</div>
+      <div class="tmuted" style="margin-bottom:14px">Preview any player's report card using current data. On May 31st, tap "Send All" to unlock reports for everyone.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+        <select id="reportPlayerSel" style="margin-bottom:0">
+          <option value="">Select player</option>
+        </select>
+        <button class="btn btn-purple btn-sm" style="height:46px;margin-bottom:0" onclick="previewReport()">Preview Card</button>
+      </div>
+      <button class="btn btn-surface" onclick="previewTeamReport('A')" style="margin-bottom:6px">Preview Team A Card</button>
+      <button class="btn btn-surface" onclick="previewTeamReport('B')" style="margin-bottom:6px">Preview Team B Card</button>
+      <button class="btn btn-surface" onclick="previewTeamReport('C')" style="margin-bottom:6px">Preview Team C Card</button>
+      <div style="height:1px;background:var(--border);margin:12px 0"></div>
+      <button class="btn btn-gold" onclick="unlockReports()">🎁 Unlock Reports for Everyone</button>
+      <div style="font-size:11px;color:var(--muted);text-align:center;margin-top:6px">Use this on May 31st when everyone's done for the day</div>
+    </div>
+
     <div class="card">
       <div class="card-title">Role Guide</div>
       <div style="padding:10px 0;border-bottom:1px solid var(--border)">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-          <span class="rbadge rCaptain">Captain</span>
-          <span style="font-size:13px;font-weight:700">16 workouts target</span>
-        </div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span class="rbadge rCaptain">Captain</span><span style="font-size:13px;font-weight:700">16 workouts target</span></div>
         <div style="font-size:12px;color:var(--muted)">Hit → <span style="color:var(--green);font-weight:700">+10 pts</span> on May 31 &nbsp;|&nbsp; Miss → <span style="color:var(--red);font-weight:700">−10 pts</span></div>
-        <div style="font-size:11px;color:var(--muted);margin-top:3px">Miss by 3+ workouts and the penalty applies</div>
       </div>
       <div style="padding:10px 0;border-bottom:1px solid var(--border)">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-          <span class="rbadge rVC">Vice Captain</span>
-          <span style="font-size:13px;font-weight:700">20 workouts target</span>
-        </div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span class="rbadge rVC">Vice Captain</span><span style="font-size:13px;font-weight:700">20 workouts target</span></div>
         <div style="font-size:12px;color:var(--muted)">Hit → <span style="color:var(--green);font-weight:700">+15 pts</span> on May 31 &nbsp;|&nbsp; Miss → <span style="color:var(--red);font-weight:700">−10 pts</span></div>
       </div>
       <div style="padding:10px 0">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
-          <span class="rbadge rPlayer">Player</span>
-          <span style="font-size:13px;font-weight:700">No minimum target</span>
-        </div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span class="rbadge rPlayer">Player</span><span style="font-size:13px;font-weight:700">No minimum target</span></div>
         <div style="font-size:12px;color:var(--muted)">Earns base, streak, and team bonus points</div>
       </div>
     </div>
@@ -273,114 +316,40 @@ input::placeholder{color:var(--muted)}
   </div>
 </div>
 
+<!-- REPORT MODAL -->
+<div id="reportModal" class="hidden">
+  <div class="report-actions">
+    <button class="btn btn-surface btn-sm" onclick="closeReport()" style="flex:1">✕ Close</button>
+    <button class="btn btn-dark btn-sm" onclick="downloadReport()" style="flex:2">⬇ Save Image</button>
+  </div>
+  <div id="reportCardWrap"></div>
+</div>
+
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script>
-const FB_CFG = {
-  apiKey:"AIzaSyD9zjHYVXjmMs6GtxofziIcYCUa3PwJOcw",
-  authDomain:"hardcoremay-5b24b.firebaseapp.com",
-  projectId:"hardcoremay-5b24b",
-  storageBucket:"hardcoremay-5b24b.firebasestorage.app",
-  messagingSenderId:"328352656938",
-  appId:"1:328352656938:web:7214be01fd6bb5e25edd53"
-};
+const FB_CFG={apiKey:"AIzaSyD9zjHYVXjmMs6GtxofziIcYCUa3PwJOcw",authDomain:"hardcoremay-5b24b.firebaseapp.com",projectId:"hardcoremay-5b24b",storageBucket:"hardcoremay-5b24b.firebasestorage.app",messagingSenderId:"328352656938",appId:"1:328352656938:web:7214be01fd6bb5e25edd53"};
 
-let PLAYERS = [
-  {name:"Anushi",   team:"A", role:"Captain"},
-  {name:"Tanmay",   team:"A", role:"Vice Captain"},
-  {name:"Hasti",    team:"A", role:"Player"},
-  {name:"Priyank",  team:"A", role:"Player"},
-  {name:"Harsh",    team:"A", role:"Player"},
-  {name:"Vidhita",  team:"B", role:"Captain"},
-  {name:"Bhavika",  team:"B", role:"Vice Captain"},
-  {name:"Riya",     team:"B", role:"Player"},
-  {name:"Ronak",    team:"B", role:"Player"},
-  {name:"Tanish",   team:"B", role:"Player"},
-  {name:"Hardik",   team:"C", role:"Captain"},
-  {name:"Hritika",  team:"C", role:"Vice Captain"},
-  {name:"Nirag",    team:"C", role:"Player"},
-  {name:"Twinkle",  team:"C", role:"Player"},
-  {name:"Sannidhi", team:"C", role:"Player"},
+let PLAYERS=[
+  {name:"Anushi",team:"A",role:"Captain"},{name:"Tanmay",team:"A",role:"Vice Captain"},
+  {name:"Hasti",team:"A",role:"Player"},{name:"Priyank",team:"A",role:"Player"},{name:"Harsh",team:"A",role:"Player"},
+  {name:"Vidhita",team:"B",role:"Captain"},{name:"Bhavika",team:"B",role:"Vice Captain"},
+  {name:"Riya",team:"B",role:"Player"},{name:"Ronak",team:"B",role:"Player"},{name:"Tanish",team:"B",role:"Player"},
+  {name:"Hardik",team:"C",role:"Captain"},{name:"Hritika",team:"C",role:"Vice Captain"},
+  {name:"Nirag",team:"C",role:"Player"},{name:"Twinkle",team:"C",role:"Player"},{name:"Sannidhi",team:"C",role:"Player"},
 ];
 
-const ROLE_DESC = {
-  "Captain":      "Target: 16 workouts → +10 pts. Miss → -10 pts.",
-  "Vice Captain": "Target: 20 workouts → +15 pts. Miss → -10 pts.",
-  "Player":       "Earn points through workouts, streaks, and team bonuses."
-};
+const ROLE_DESC={"Captain":"Target: 16 workouts → +10 pts. Miss → -10 pts.","Vice Captain":"Target: 20 workouts → +15 pts. Miss → -10 pts.","Player":"Earn points through workouts, streaks, and team bonuses."};
+const COMMON=["Gym","Padel","Walk","Run","Yoga","Volleyball","Cricket","Swimming","Cycling","Pickleball","Pilates","Football","Basketball","Badminton","Weight training","Cardio","HIIT","Strength training","Zumba","Boxing","Stretching","Hiking","Dance","Rowing","Spinning"];
+const MONTH=4,YEAR=2026,DAYS=31;
 
-const COMMON = ["Gym","Padel","Walk","Run","Yoga","Volleyball","Cricket","Swimming",
-  "Cycling","Pickleball","Pilates","Football","Basketball","Badminton",
-  "Weight training","Cardio","HIIT","Strength training","Zumba","Boxing",
-  "Stretching","Hiking","Dance","Rowing","Spinning"];
+const DAILY_FACTS=["Your heart pumps 5 litres of blood per minute at rest. During exercise, that jumps to 20.","Muscle doesn't turn to fat when you stop training. They're completely different tissues.","A 20-minute walk can reduce anxiety as effectively as a mild tranquiliser.","Your bones are constantly rebuilding themselves. Weight training speeds this up significantly.","The human body has over 600 muscles. You ignored most of them today.","Exercise increases BDNF — a protein that literally grows new brain cells.","Cold water after a workout reduces soreness by constricting blood vessels. Ice baths aren't just for footballers.","Your muscles store enough glycogen for roughly 90 minutes of intense exercise. After that, you bonk.","Laughter activates the same endorphin pathways as exercise. Unfortunately it doesn't count as a workout.","The average person walks 100,000 miles in their lifetime. That's 4 times around the Earth.","Sleep is when your muscles actually repair. The gym breaks them. Bed fixes them.","Sweat has no smell. The bacteria on your skin does. You're welcome.","Your grip strength is one of the strongest predictors of long-term health outcomes. Squeeze something today.","The world record for most push-ups in 24 hours is 10,507. Your target is considerably more reasonable.","Rest days are not optional. Muscle grows during recovery, not during the workout.","Exercising in the morning increases your metabolism for up to 14 hours afterward.","The human body has 206 bones. Every single one benefits from regular movement.","Consistent moderate exercise can add up to 7 years to your life expectancy.","Your brain uses 20% of your body's energy even at rest. Exercise makes it more efficient.","Standing for 3 hours a day burns the same calories as running 10 marathons a year.","Stretching before bed improves sleep quality by reducing muscle tension and cortisol.","The fittest organ in your body is your heart — it never skips a workout.","Dehydration of just 2% reduces athletic performance by up to 10%. Drink water.","Working out with a group makes you exercise harder and longer than going alone. Science agrees.","Your body burns more calories in the 24 hours after a workout than during it.","Running a kilometre burns roughly the same calories whether you walk or sprint it. Pace is optional.","Muscles have memory. Taking a break doesn't reset everything — they bounce back faster than you think.","The word 'exercise' comes from the Latin 'exercere' meaning to drive out or keep busy. Keep busy.","You have about 37 trillion cells in your body. Every single one benefits when you move.","The endorphin rush after exercise lasts up to 4 hours. That's a long time to feel smug.","Consistency beats intensity every single time. Showing up is the whole battle."];
+const STREAK_MSGS={2:"Two in a row. Even your excuses are impressed.",3:"Three days straight. Your bed is filing a complaint.",4:"Four days. The couch has started a support group.",5:"Five days straight. Your alarm is starting to respect you.",6:"Six days. At this point your body thinks this is normal. It is.",7:"A full week. Somewhere, a gym bro is shedding a single tear of pride.",8:"Eight days. You're either very disciplined or very competitive. Both work.",9:"Nine days. The excuses have packed their bags and left.",10:"Ten days. You're basically a professional at this point.",14:"Two weeks straight. Your past self wouldn't believe it.",21:"Three weeks. Scientists say habits form at 21 days. Congratulations, you're a habit.",30:"Thirty days. You absolute machine. This is the way."};
+const COMEBACK_MSGS=["Oh look who decided to show up. The leaderboard was getting lonely.","Back from the dead. We were about to file a missing persons report.","The couch finally let you go. Respect its sacrifice.","Your streak is gone but your audacity is intact. We respect it.","Absence makes the muscles weaker. Welcome back anyway.","We didn't miss you. The leaderboard did though.","Plot twist — they're back. Log something before we all faint.","The gym forgot your name. Time to reintroduce yourself.","Your team has questions. We suggest logging and asking for forgiveness later.","Rest days are healthy. Several of them in a row is a lifestyle choice. Welcome back."];
 
-const MONTH=4, YEAR=2026, DAYS=31;
-
-const DAILY_FACTS = [
-  "Your heart pumps 5 litres of blood per minute at rest. During exercise, that jumps to 20.",
-  "Muscle doesn't turn to fat when you stop training. They're completely different tissues.",
-  "A 20-minute walk can reduce anxiety as effectively as a mild tranquiliser.",
-  "Your bones are constantly rebuilding themselves. Weight training speeds this up significantly.",
-  "The human body has over 600 muscles. You ignored most of them today.",
-  "Exercise increases BDNF — a protein that literally grows new brain cells.",
-  "Cold water after a workout reduces soreness by constricting blood vessels. Ice baths aren't just for footballers.",
-  "Your muscles store enough glycogen for roughly 90 minutes of intense exercise. After that, you bonk.",
-  "Laughter activates the same endorphin pathways as exercise. Unfortunately it doesn't count as a workout.",
-  "The average person walks 100,000 miles in their lifetime. That's 4 times around the Earth.",
-  "Sleep is when your muscles actually repair. The gym breaks them. Bed fixes them.",
-  "Sweat has no smell. The bacteria on your skin does. You're welcome.",
-  "Your grip strength is one of the strongest predictors of long-term health outcomes. Squeeze something today.",
-  "The world record for most push-ups in 24 hours is 10,507. Your target is considerably more reasonable.",
-  "Rest days are not optional. Muscle grows during recovery, not during the workout.",
-  "Exercising in the morning increases your metabolism for up to 14 hours afterward.",
-  "The human body has 206 bones. Every single one benefits from regular movement.",
-  "Consistent moderate exercise can add up to 7 years to your life expectancy.",
-  "Your brain uses 20% of your body's energy even at rest. Exercise makes it more efficient.",
-  "Standing for 3 hours a day burns the same calories as running 10 marathons a year.",
-  "Stretching before bed improves sleep quality by reducing muscle tension and cortisol.",
-  "The fittest organ in your body is your heart — it never skips a workout.",
-  "Dehydration of just 2% reduces athletic performance by up to 10%. Drink water.",
-  "Working out with a group makes you exercise harder and longer than going alone. Science agrees.",
-  "Your body burns more calories in the 24 hours after a workout than during it.",
-  "Running a kilometre burns roughly the same calories whether you walk or sprint it. Pace is optional.",
-  "Muscles have memory. Taking a break doesn't reset everything — they bounce back faster than you think.",
-  "The word 'exercise' comes from the Latin 'exercere' meaning to drive out or keep busy. Keep busy.",
-  "You have about 37 trillion cells in your body. Every single one benefits when you move.",
-  "The endorphin rush after exercise lasts up to 4 hours. That's a long time to feel smug.",
-  "Consistency beats intensity every single time. Showing up is the whole battle.",
-];
-
-const STREAK_MSGS = {
-  2:"Two in a row. Even your excuses are impressed.",
-  3:"Three days straight. Your bed is filing a complaint.",
-  4:"Four days. The couch has started a support group.",
-  5:"Five days straight. Your alarm is starting to respect you.",
-  6:"Six days. At this point your body thinks this is normal. It is.",
-  7:"A full week. Somewhere, a gym bro is shedding a single tear of pride.",
-  8:"Eight days. You're either very disciplined or very competitive. Both work.",
-  9:"Nine days. The excuses have packed their bags and left.",
-  10:"Ten days. You're basically a professional at this point.",
-  14:"Two weeks straight. Your past self wouldn't believe it.",
-  21:"Three weeks. Scientists say habits form at 21 days. Congratulations, you're a habit.",
-  30:"Thirty days. You absolute machine. This is the way.",
-};
-
-const COMEBACK_MSGS = [
-  "Oh look who decided to show up. The leaderboard was getting lonely.",
-  "Back from the dead. We were about to file a missing persons report.",
-  "The couch finally let you go. Respect its sacrifice.",
-  "Your streak is gone but your audacity is intact. We respect it.",
-  "Absence makes the muscles weaker. Welcome back anyway.",
-  "We didn't miss you. The leaderboard did though.",
-  "Plot twist — they're back. Log something before we all faint.",
-  "The gym forgot your name. Time to reintroduce yourself.",
-  "Your team has questions. We suggest logging and asking for forgiveness later.",
-  "Rest days are healthy. Several of them in a row is a lifestyle choice. Welcome back.",
-];
-
-function getDailyFact(){ return DAILY_FACTS[(new Date().getDate()-1)%DAILY_FACTS.length]; }
-function getStreakMsg(s){ const keys=Object.keys(STREAK_MSGS).map(Number).sort((a,b)=>b-a); for(const k of keys){ if(s>=k) return STREAK_MSGS[k]; } return null; }
-function getRandomComeback(){ return COMEBACK_MSGS[Math.floor(Math.random()*COMEBACK_MSGS.length)]; }
+function getDailyFact(){return DAILY_FACTS[(new Date().getDate()-1)%DAILY_FACTS.length];}
+function getStreakMsg(s){const keys=Object.keys(STREAK_MSGS).map(Number).sort((a,b)=>b-a);for(const k of keys){if(s>=k)return STREAK_MSGS[k];}return null;}
+function getRandomComeback(){return COMEBACK_MSGS[Math.floor(Math.random()*COMEBACK_MSGS.length)];}
 
 let db,me=null,selDay=null,selW=[];
 let allLogs=[],bonus30=[];
@@ -390,21 +359,15 @@ db=firebase.firestore();
 
 window.onload=()=>{
   const savedPlayers=localStorage.getItem('sw_players');
-  if(savedPlayers){ const parsed=JSON.parse(savedPlayers); parsed.forEach(saved=>{ const p=PLAYERS.find(x=>x.name===saved.name); if(p){p.team=saved.team;p.role=saved.role;} }); }
+  if(savedPlayers){const parsed=JSON.parse(savedPlayers);parsed.forEach(saved=>{const p=PLAYERS.find(x=>x.name===saved.name);if(p){p.team=saved.team;p.role=saved.role;}});}
   const s=localStorage.getItem('sw_user');
   if(s){me=JSON.parse(s);boot();}else{buildOnboard();}
-  document.addEventListener('click',e=>{ if(!e.target.classList.contains('cd')) document.querySelectorAll('.cal-tip').forEach(t=>t.remove()); });
+  document.addEventListener('click',e=>{if(!e.target.classList.contains('cd'))document.querySelectorAll('.cal-tip').forEach(t=>t.remove());});
 };
 
-function buildOnboard(){
-  document.getElementById('obgrid').innerHTML=PLAYERS.map(p=>`
-    <div class="pbtn" onclick="choosePlayer('${p.name}')">
-      <div class="pname">${p.name}</div><div class="prole">${p.role}</div>
-      <div class="pteam t${p.team}">Team ${p.team}</div>
-    </div>`).join('');
-}
-function choosePlayer(name){ me=PLAYERS.find(p=>p.name===name); localStorage.setItem('sw_user',JSON.stringify(me)); document.getElementById('ob').style.display='none'; boot(); }
-function resetUser(){ if(!confirm('Switch user?')) return; localStorage.removeItem('sw_user'); location.reload(); }
+function buildOnboard(){document.getElementById('obgrid').innerHTML=PLAYERS.map(p=>`<div class="pbtn" onclick="choosePlayer('${p.name}')"><div class="pname">${p.name}</div><div class="prole">${p.role}</div><div class="pteam t${p.team}">Team ${p.team}</div></div>`).join('');}
+function choosePlayer(name){me=PLAYERS.find(p=>p.name===name);localStorage.setItem('sw_user',JSON.stringify(me));document.getElementById('ob').style.display='none';boot();}
+function resetUser(){if(!confirm('Switch user?'))return;localStorage.removeItem('sw_user');location.reload();}
 
 function boot(){
   document.getElementById('ob').style.display='none';
@@ -413,18 +376,21 @@ function boot(){
   const tc=p.team==='A'?'#dc2626':p.team==='B'?'#2563eb':'#16a34a';
   const tbg=p.team==='A'?'#fee2e2':p.team==='B'?'#dbeafe':'#dcfce7';
   const av=document.getElementById('navAv');
-  av.textContent=me.name[0]; av.style.background=tbg; av.style.color=tc; av.style.border=`2px solid ${tc}`;
+  av.textContent=me.name[0];av.style.background=tbg;av.style.color=tc;av.style.border=`2px solid ${tc}`;
   document.getElementById('navNm').textContent=me.name;
   const s=document.getElementById('aPlayer');
   PLAYERS.forEach(p=>{const o=document.createElement('option');o.value=p.name;o.textContent=p.name;s.appendChild(o);});
-  renderAdminRoles(); subscribe(); renderHome();
+  // populate report player select
+  const rp=document.getElementById('reportPlayerSel');
+  PLAYERS.forEach(p=>{const o=document.createElement('option');o.value=p.name;o.textContent=p.name;rp.appendChild(o);});
+  renderAdminRoles();subscribe();renderHome();
 }
 
 function subscribe(){
   db.collection('logs').where('month','==',MONTH).where('year','==',YEAR).onSnapshot(s=>{allLogs=s.docs.map(d=>({id:d.id,...d.data()}));refresh();});
   db.collection('bonuses_30day').where('month','==',MONTH).where('year','==',YEAR).onSnapshot(s=>{bonus30=s.docs.map(d=>({id:d.id,...d.data()}));refresh();});
 }
-function refresh(){ renderHome(); renderLB(); renderFeed(); }
+function refresh(){renderHome();renderLB();renderFeed();}
 
 // ── SCORING ────────────────────────────────────────────────────────────────
 function score(playerName){
@@ -432,178 +398,390 @@ function score(playerName){
   const logs=allLogs.filter(l=>l.player===playerName);
   const days=new Set(logs.map(l=>l.day));
   const wo=days.size;
-  const base=wo*5; // +5 per workout
-
+  const base=wo*5;
   const today=new Date();
   const todayDay=today.getMonth()===MONTH&&today.getFullYear()===YEAR?today.getDate():DAYS;
   const checkUpTo=days.has(todayDay)?todayDay:todayDay-1;
   let cur=0;
-  for(let d=1;d<=checkUpTo;d++){ if(days.has(d)) cur++; else cur=0; }
+  for(let d=1;d<=checkUpTo;d++){if(days.has(d))cur++;else cur=0;}
   const streak=cur;
   const sb=0;
-
-  // Perfect week +10
   const fullWeeks=[[4,10],[11,17],[18,24],[25,31]];
   let wb=0;
-  fullWeeks.forEach(([s,e])=>{ for(let d=s;d<=e;d++){if(!days.has(d)) return;} wb+=10; });
-
+  fullWeeks.forEach(([s,e])=>{for(let d=s;d<=e;d++){if(!days.has(d))return;}wb+=10;});
   const isLastDay=today.getMonth()===MONTH&&today.getFullYear()===YEAR&&today.getDate()===31;
   const isAfterMonth=today.getMonth()>MONTH||today.getFullYear()>YEAR;
   let rb=0;
-  if(isLastDay||isAfterMonth){
-    if(p.role==='Captain') rb=wo>=16?10:-10;
-    else if(p.role==='Vice Captain') rb=wo>=20?15:-10;
-  }
-
-  // Team streak +1+2+3
+  if(isLastDay||isAfterMonth){if(p.role==='Captain')rb=wo>=16?10:-10;else if(p.role==='Vice Captain')rb=wo>=20?15:-10;}
   const teamLogs=allLogs.filter(l=>PLAYERS.find(x=>x.name===l.player&&x.team===p.team));
   const dc={};
-  teamLogs.forEach(l=>{if(!dc[l.day]) dc[l.day]=new Set(); dc[l.day].add(l.player);});
+  teamLogs.forEach(l=>{if(!dc[l.day])dc[l.day]=new Set();dc[l.day].add(l.player);});
   let tb=0,teamStreak=0;
-  for(let d=1;d<=DAYS;d++){
-    const pt=dc[d]||new Set();
-    if(pt.size>=3){teamStreak++;if(pt.has(playerName)) tb+=Math.min(3,teamStreak);}
-    else{teamStreak=0;}
-  }
-
-  const b30=bonus30.find(b=>b.player===playerName)?50:0; // +50 for 30-day
-  const pen=(isLastDay||isAfterMonth)&&wo<12?(wo-12)*5:0; // -5 per missed below 12
+  for(let d=1;d<=DAYS;d++){const pt=dc[d]||new Set();if(pt.size>=3){teamStreak++;if(pt.has(playerName))tb+=Math.min(3,teamStreak);}else{teamStreak=0;}}
+  const b30=bonus30.find(b=>b.player===playerName)?50:0;
+  const pen=(isLastDay||isAfterMonth)&&wo<12?(wo-12)*5:0;
   const total=base+sb+wb+rb+tb+b30+pen;
-  return {wo,base,sb,wb,rb,tb,b30,pen,total,streak,days};
+
+  // Extra stats for report
+  const teamStreakDays=Object.values(dc).filter(ps=>ps.has(playerName)&&ps.size>=3).length;
+
+  // Best streak (historical max, not just current)
+  let bestStreak=0,runStreak=0;
+  for(let d=1;d<=DAYS;d++){if(days.has(d)){runStreak++;bestStreak=Math.max(bestStreak,runStreak);}else{runStreak=0;}}
+
+  // Comeback count
+  let comebacks=0,lastLogged=-99;
+  const sortedDays=[...days].sort((a,b)=>a-b);
+  sortedDays.forEach(d=>{if(d-lastLogged>=3)comebacks++;lastLogged=d;});
+  if(sortedDays.length>0)comebacks=Math.max(0,comebacks-1);
+
+  // Favourite workout
+  const wCounts={};
+  logs.forEach(l=>(l.workouts||[l.workout]).filter(Boolean).forEach(w=>{wCounts[w]=(wCounts[w]||0)+1;}));
+  const favWorkout=Object.entries(wCounts).sort((a,b)=>b[1]-a[1])[0];
+
+  // Workout variety
+  const uniqueWorkouts=new Set(logs.flatMap(l=>l.workouts||[l.workout]).filter(Boolean)).size;
+
+  // Best half
+  const firstHalf=[...days].filter(d=>d<=15).length;
+  const secondHalf=[...days].filter(d=>d>15).length;
+
+  return {wo,base,sb,wb,rb,tb,b30,pen,total,streak,days,teamStreakDays,bestStreak,comebacks,favWorkout,uniqueWorkouts,firstHalf,secondHalf,wCounts};
 }
 
-function teamTotal(team){ return PLAYERS.filter(p=>p.team===team).reduce((s,p)=>s+score(p.name).total,0); }
+function teamTotal(team){return PLAYERS.filter(p=>p.team===team).reduce((s,p)=>s+score(p.name).total,0);}
 
-// ── HOME ───────────────────────────────────────────────────────────────────
+// ── REPORT ENGINE ──────────────────────────────────────────────────────────
+function getArchetype(sc,rank){
+  if(sc.wo>=24) return 'machine';
+  if(sc.bestStreak>=14) return 'streaker';
+  if(sc.wo>=18&&sc.bestStreak>=7) return 'consistent';
+  if(sc.comebacks>=2&&sc.wo>=10) return 'comeback';
+  if(sc.secondHalf-sc.firstHalf>=5) return 'latebloomer';
+  if(sc.wo<10) return 'struggling';
+  return 'contributor';
+}
+
+function getSuperlative(playerName, sc, rank){
+  const allScores=PLAYERS.map(p=>({name:p.name,sc:score(p.name)}));
+  const maxWO=Math.max(...allScores.map(x=>x.sc.wo));
+  const maxStreak=Math.max(...allScores.map(x=>x.sc.bestStreak));
+  const maxTeamDays=Math.max(...allScores.map(x=>x.sc.teamStreakDays));
+  const maxComebacks=Math.max(...allScores.map(x=>x.sc.comebacks));
+  const maxVariety=Math.max(...allScores.map(x=>x.sc.uniqueWorkouts));
+
+  if(rank===1) return {icon:'👑',label:'Hero of Squad Wars'};
+  if(rank===2) return {icon:'🥈',label:'Runner Up'};
+  if(rank===3) return {icon:'🥉',label:'Third Place'};
+  if(sc.wo===maxWO&&rank>3) return {icon:'🏆',label:'Iron Attendance'};
+  if(sc.bestStreak===maxStreak) return {icon:'🔥',label:'Unbroken'};
+  if(sc.teamStreakDays===maxTeamDays) return {icon:'⚡',label:'Team Glue'};
+  if(sc.comebacks===maxComebacks&&sc.comebacks>=2) return {icon:'🔄',label:'The Returner'};
+  if(sc.uniqueWorkouts===maxVariety&&sc.uniqueWorkouts>=4) return {icon:'🎨',label:'Renaissance Athlete'};
+  if(sc.secondHalf-sc.firstHalf>=5) return {icon:'📈',label:'Late Bloomer'};
+  if(sc.favWorkout&&sc.wCounts[sc.favWorkout[0]]>=5) return {icon:'🎯',label:'The Specialist'};
+  return {icon:'💪',label:'Showed Up'};
+}
+
+const PARAGRAPHS={
+  machine:[
+    "May wasn't a month for you — it was a statement. You showed up so consistently that the leaderboard stopped being surprised and started being respectful. Other people logged when they felt like it. You logged because that's just what you do.",
+    "Twenty-something workouts in 31 days. That's not fitness, that's discipline with a calendar. You didn't win this month by accident. You made it look easy and we all know it wasn't.",
+    "The group watched you on the feed every day and felt two things — inspired and slightly pressured. That's the highest compliment this app can give. You set the tone for May. Now June has to match it.",
+    "Some people track workouts. You collect them. Every single week you showed up and the numbers spoke for themselves. The leaderboard was never a mystery when your name was in it.",
+  ],
+  consistent:[
+    "You didn't have the flashiest numbers but you had the most important quality — you were there. Week after week, no dramatic gaps, no week-long vanishing acts. Just steady, quiet, reliable effort.",
+    "The people who win fitness over a lifetime aren't the ones who go hardest. They're the ones who never stop. May proved you're the second kind. That's rarer and worth more.",
+    "Your calendar tells the real story — green days stacked up quietly while others were busy talking about working out. You just did it. That consistency is the foundation everything else gets built on.",
+    "No perfect weeks but no abandoned weeks either. You found your pace in May and kept it. That rhythm carries into June automatically. You've already done the hardest part — building the habit.",
+  ],
+  streaker:[
+    "You went on a run in May that people noticed. Not just the days logged — the unbroken chain of them. When a streak hits double digits it stops being about fitness and starts being about identity. You found yours.",
+    "There's a version of May where you coast. Instead you built something that had its own momentum. Every day you logged made the next day easier. That's what a streak actually is — borrowed willpower from past you.",
+    "The streak was the story of your May. Whether it held all month or eventually broke, what you built during it was real. No app gave you that — you did.",
+    "Some people log. You locked in. The difference showed on the leaderboard and it showed on the feed. Your streak was the thread that ran through May and pulled your best month together.",
+  ],
+  comeback:[
+    "Life kept interrupting May and you kept not caring. Three times the streak broke and three times you came back like the gap never happened. That's not inconsistency — that's resilience with evidence.",
+    "You had a complicated relationship with May and that's okay. What matters is you never actually quit. Every time the app saw you return it wanted to say something witty. Mostly it just felt relieved.",
+    "The comeback is the hardest workout. Getting back after a gap, knowing you've lost some ground, choosing to log anyway — that takes more than showing up consistently ever does. You did it more than once.",
+    "Your May wasn't linear and that makes it more honest than most. You fell off, you came back, you fell off, you came back. The net result is more workouts than half the group. The math works out.",
+  ],
+  latebloomer:[
+    "Something clicked for you in the second half of May and the numbers know it. Whatever changed — schedule, motivation, competitive pressure — you caught fire late and made the final weeks count.",
+    "Slow start, strong finish. June doesn't know about the slow start. It only knows the version of you that showed up in weeks three and four. Carry that person into the new month.",
+    "The first two weeks of May were one story. The last two were completely different. Most people have their best days early and fade. You did it backwards and it ended up meaning more.",
+    "You found your footing late but you found it. The second half of this month looked like a different person logging. That person should be the one who opens the app on June 1st.",
+  ],
+  contributor:[
+    "The numbers don't tell the full story and yours is proof. Every workout you logged contributed to the team, kept the streak alive, showed up on the feed for someone else to see. Small inputs, real impact.",
+    "June is a clean slate and you already know more about what works for you than you did on May 1st. That knowledge is worth more than any point total.",
+    "You showed up when you could and the team noticed. Fitness is personal but it's also cumulative — every rep logged by anyone on the squad adds to something bigger than one person's score.",
+    "Not every month starts perfectly. What matters is you were in it. The app, the group, the challenge — you were present. May was the baseline. Now you know what to beat.",
+  ],
+  struggling:[
+    "May was hard. The numbers are honest and so is this card. But here's the thing — you're reading this, which means you were part of it. You started. That counts more than it sounds like it does.",
+    "Not your month, and that's allowed. Life doesn't pause for a fitness challenge. What matters now is whether June starts differently. You know the app, you know the group, you know the rules. Fresh start in 24 hours.",
+    "The leaderboard doesn't show everything. It doesn't show what was happening in your life, what you were managing, what you were carrying. May was one month. June is another. Show up differently.",
+    "Lowest workout count in the group and you still logged. That takes something. June is 31 more days and a clean sheet. The group needs you in it properly.",
+  ],
+};
+
+function getClosingLine(archetype, rank){
+  const lines={
+    machine:["June will need a new #1. Spoiler: it's probably still you.","May was the warmup. Keep the receipts.","The leaderboard has your name memorised.","Standards set. Now maintain them."],
+    consistent:["Quiet consistency is the loudest flex.","You don't need a streak. You are one.","The habit is built. Now push it.","June doesn't scare you. Nothing does."],
+    streaker:["The streak is a lifestyle now. Guard it.","Unbroken once. Do it again.","You found your rhythm. Don't lose it.","June streak starts now."],
+    comeback:["Every return makes the next return easier.","You showed up. That's the whole game.","The comeback is always the best part.","June. No gaps. Just you."],
+    latebloomer:["The second half was real. Keep it going.","Late bloomers flower longest.","You found it. Now don't let it go.","June starts where May ended."],
+    contributor:["Every rep counted. June needs more of them.","Show up more. The team will notice.","The foundation is there. Build on it.","June is yours if you want it."],
+    struggling:["June is 31 more chances. Take them.","One month doesn't define you. The next one might.","Fresh start. Real one. Tomorrow.","The group wants you back. So does the leaderboard."],
+  };
+  const opts=lines[archetype]||lines.contributor;
+  return opts[Math.floor(Math.random()*opts.length)];
+}
+
+function getFunPills(sc, playerName){
+  const pills=[];
+  if(sc.favWorkout) pills.push(`🏅 Favourite: ${sc.favWorkout[0]} (${sc.favWorkout[1]}x)`);
+  if(sc.uniqueWorkouts>1) pills.push(`💡 Tried ${sc.uniqueWorkouts} workout types`);
+  if(sc.comebacks>0) pills.push(`🔄 Came back ${sc.comebacks} time${sc.comebacks>1?'s':''}`);
+  if(sc.teamStreakDays>0) pills.push(`🤝 ${sc.teamStreakDays} team bonus days`);
+  if(sc.bestStreak>0) pills.push(`🔥 Best streak: ${sc.bestStreak} days`);
+  if(sc.wb>0) pills.push(`📅 ${sc.wb/10} perfect week${sc.wb/10>1?'s':''}`);
+
+  // Try to find time pattern (morning/evening)
+  const logs=allLogs.filter(l=>l.player===playerName&&l.timestamp?.seconds);
+  if(logs.length>=3){
+    const hours=logs.map(l=>new Date(l.timestamp.seconds*1000).getHours());
+    const mornings=hours.filter(h=>h<12).length;
+    const evenings=hours.filter(h=>h>=17).length;
+    if(mornings>evenings&&mornings>logs.length*0.5) pills.push('🌅 Mostly a morning person');
+    else if(evenings>mornings&&evenings>logs.length*0.5) pills.push('🌙 Mostly an evening person');
+  }
+
+  return pills.slice(0,4);
+}
+
+function getTeamColour(team){
+  return team==='A'?['#dc2626','#b91c1c']:team==='B'?['#2563eb','#1d4ed8']:['#16a34a','#15803d'];
+}
+
+function buildReportCard(playerName){
+  const p=PLAYERS.find(x=>x.name===playerName);
+  const sc=score(playerName);
+  const rank=getRank(playerName);
+  const archetype=getArchetype(sc,rank);
+  const superlative=getSuperlative(playerName,sc,rank);
+  const paragraph=PARAGRAPHS[archetype][Math.floor(Math.random()*PARAGRAPHS[archetype].length)];
+  const closing=getClosingLine(archetype,rank);
+  const pills=getFunPills(sc,playerName);
+  const [c1,c2]=getTeamColour(p.team);
+
+  // Hero stat logic
+  let heroNum, heroLabel;
+  if(sc.wo>=24){heroNum=sc.wo;heroLabel='Days Forged';}
+  else if(sc.bestStreak>=14){heroNum=sc.bestStreak;heroLabel='Days Unbroken';}
+  else if(sc.teamStreakDays>=10){heroNum=sc.teamStreakDays;heroLabel='Team Bonus Days';}
+  else{heroNum=sc.total;heroLabel='Total Points';}
+
+  const teamWon=teamTotal(p.team)===Math.max(...['A','B','C'].map(t=>teamTotal(t)));
+
+  return `<div class="report-card" id="rCard_${playerName}" style="background:linear-gradient(160deg,${c1} 0%,${c2} 100%)">
+    <div class="rc-header">
+      <div class="rc-month">Squad Wars · May 2026</div>
+      <div class="rc-name">${playerName}</div>
+      <div class="rc-badge">${superlative.icon} ${superlative.label}</div>
+      <div class="rc-team">Team ${p.team} · ${teamWon?'🏆 Winners':'May 2026'} · Rank #${rank} of ${PLAYERS.length}</div>
+    </div>
+    <div class="rc-hero">
+      <div class="rc-hero-num">${heroNum}</div>
+      <div class="rc-hero-label">${heroLabel}</div>
+    </div>
+    <div class="rc-stats">
+      <div class="rc-stat"><div class="rc-stat-v">${sc.wo}</div><div class="rc-stat-l">Workouts</div></div>
+      <div class="rc-stat"><div class="rc-stat-v">${sc.total}</div><div class="rc-stat-l">Points</div></div>
+      <div class="rc-stat"><div class="rc-stat-v">${sc.bestStreak}🔥</div><div class="rc-stat-l">Best Streak</div></div>
+      <div class="rc-stat"><div class="rc-stat-v">${sc.teamStreakDays}</div><div class="rc-stat-l">Team Days</div></div>
+      <div class="rc-stat"><div class="rc-stat-v">${sc.wb/10}</div><div class="rc-stat-l">Perfect Wks</div></div>
+      <div class="rc-stat"><div class="rc-stat-v">#${rank}</div><div class="rc-stat-l">Final Rank</div></div>
+    </div>
+    <div class="rc-para">"${paragraph}"</div>
+    <div class="rc-pills">${pills.map(p=>`<div class="rc-pill">${p}</div>`).join('')}</div>
+    <div class="rc-closing"><div class="rc-closing-text">${closing}</div></div>
+    <div class="rc-footer">
+      <div class="rc-footer-brand">SQUAD WARS · MAY 2026</div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.4)">${sc.wo} workouts · ${sc.total} pts</div>
+    </div>
+  </div>`;
+}
+
+function buildTeamCard(team){
+  const members=PLAYERS.filter(p=>p.team===team);
+  const [c1,c2]=getTeamColour(team);
+  const teams=['A','B','C'].map(t=>({t,s:teamTotal(t)})).sort((a,b)=>b.s-a.s);
+  const rank=teams.findIndex(t=>t.t===team)+1;
+  const won=rank===1;
+  const teamPts=teamTotal(team);
+  const totalWO=members.reduce((s,p)=>s+score(p.name).wo,0);
+
+  // Team streak record
+  const teamLogs=allLogs.filter(l=>PLAYERS.find(x=>x.name===l.player&&x.team===team));
+  const dc={};
+  teamLogs.forEach(l=>{if(!dc[l.day])dc[l.day]=new Set();dc[l.day].add(l.player);});
+  let maxTeamStreak=0,curTS=0;
+  for(let d=1;d<=DAYS;d++){const pt=dc[d]||new Set();if(pt.size>=3){curTS++;maxTeamStreak=Math.max(maxTeamStreak,curTS);}else{curTS=0;}}
+  const qualDays=Object.values(dc).filter(ps=>ps.size>=3).length;
+
+  const teamParas={
+    won:{
+      1:`Team ${team} didn't just win May — they made it look inevitable. Every qualifying day, every team streak bonus, every workout that showed up on the feed added up to something the other teams couldn't match. This is what it looks like when a group decides together.`,
+      2:`The numbers were close until they weren't. Team ${team} found their rhythm at the right time and held it. Every member contributed something real to this result. That's what separates a team win from an individual performance.`,
+    },
+    lost:{
+      2:`Team ${team} finished second and that sentence doesn't do justice to the month they had. There were days this team looked like the favourites. June is a chance to make that feeling permanent.`,
+      3:`Third place in a three-team race is honest feedback, not a verdict. Team ${team} had moments of real quality in May — the streak days, the combined workouts, the individual effort. The gap is closeable. June closes it.`,
+    },
+  };
+
+  const paraKey=won?'won':'lost';
+  const paraRank=won?Math.min(rank,2):Math.min(rank,3);
+  const para=teamParas[paraKey][paraRank]||teamParas[paraKey][Object.keys(teamParas[paraKey])[0]];
+
+  return `<div class="report-card" id="rCard_team${team}" style="background:linear-gradient(160deg,${c1} 0%,${c2} 100%)">
+    <div class="rc-team-header">
+      <div class="rc-month">Squad Wars · May 2026</div>
+      <div class="rc-team-name">Team ${team}</div>
+      <div class="rc-team-result">${won?'🏆 May Champions':'#'+rank+' · May 2026'}</div>
+    </div>
+    <div class="rc-team-members">${members.map(p=>`<div class="rc-member">${p.name}</div>`).join('')}</div>
+    <div class="rc-team-stats">
+      <div class="rc-team-stat"><div class="rc-team-stat-v">${teamPts}</div><div class="rc-team-stat-l">Team Points</div></div>
+      <div class="rc-team-stat"><div class="rc-team-stat-v">${totalWO}</div><div class="rc-team-stat-l">Total Workouts</div></div>
+      <div class="rc-team-stat"><div class="rc-team-stat-v">${qualDays}</div><div class="rc-team-stat-l">Team Bonus Days</div></div>
+      <div class="rc-team-stat"><div class="rc-team-stat-v">${maxTeamStreak}</div><div class="rc-team-stat-l">Best Streak Run</div></div>
+    </div>
+    <div class="rc-team-para">"${para}"</div>
+    <div class="rc-footer">
+      <div class="rc-footer-brand">SQUAD WARS · MAY 2026</div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.4)">${totalWO} workouts combined</div>
+    </div>
+  </div>`;
+}
+
+function previewReport(){
+  const name=document.getElementById('reportPlayerSel').value;
+  if(!name){alert('Select a player');return;}
+  document.getElementById('reportCardWrap').innerHTML=buildReportCard(name);
+  document.getElementById('reportModal').classList.remove('hidden');
+  window._currentCardId=`rCard_${name}`;
+}
+
+function previewTeamReport(team){
+  document.getElementById('reportCardWrap').innerHTML=buildTeamCard(team);
+  document.getElementById('reportModal').classList.remove('hidden');
+  window._currentCardId=`rCard_team${team}`;
+}
+
+function closeReport(){document.getElementById('reportModal').classList.add('hidden');}
+
+function downloadReport(){
+  const card=document.getElementById(window._currentCardId);
+  if(!card){alert('No card to download');return;}
+  html2canvas(card,{scale:3,useCORS:true,backgroundColor:null}).then(canvas=>{
+    const link=document.createElement('a');
+    link.download=`squadwars_${window._currentCardId}.png`;
+    link.href=canvas.toDataURL('image/png');
+    link.click();
+  }).catch(()=>alert('Download failed — try screenshotting instead'));
+}
+
+function unlockReports(){
+  if(!confirm('This will unlock the Report tab for all users. Do this on May 31st when everyone is done for the day.'))return;
+  localStorage.setItem('sw_reports_unlocked','true');
+  alert('✅ Reports unlocked! Everyone can now see their card in the Reports tab.');
+}
+
+// ── HOME, LOG, LB, FEED — all unchanged from previous version ─────────────
 function renderHome(){
-  const now=new Date();
-  const h=now.getHours();
-  const g=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
+  const now=new Date();const h=now.getHours();const g=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
   document.getElementById('hGreet').textContent=`${g}, ${me.name} 👋`;
   document.getElementById('hDate').textContent=now.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-  const sc=score(me.name);
-  const pl=PLAYERS.find(p=>p.name===me.name)||me;
+  const sc=score(me.name);const pl=PLAYERS.find(p=>p.name===me.name)||me;
   const tc=pl.team==='A'?'#dc2626':pl.team==='B'?'#2563eb':'#16a34a';
-
   document.getElementById('factCard').innerHTML=`<div class="fact-card"><div class="fact-icon">🧠</div><div class="fact-text"><strong>Did you know?</strong> ${getDailyFact()}</div></div>`;
   document.getElementById('heroCard').innerHTML=`<div class="hero" style="background:#1a1a2e"><div class="hero-stripe" style="background:${tc}"></div><div class="hero-label">Your points</div><div class="hero-pts">${sc.total}</div><div class="hero-sub">Rank #${getRank(me.name)} of ${PLAYERS.length} · Team ${pl.team}</div></div>`;
   document.getElementById('nudgeCard').innerHTML=getNudgeHTML(me.name,sc);
-
   const smsg=getStreakMsg(sc.streak);
   document.getElementById('streakCard').innerHTML=sc.streak>=2&&smsg?`<div class="streak-card"><div class="streak-num">${sc.streak} 🔥</div><div class="streak-msg">${smsg}</div></div>`:'';
-
   let rHTML='';
   if(pl.role!=='Player'){
-    const tgt=pl.role==='Captain'?16:20;
-    const bonus=pl.role==='Captain'?10:15;
-    const penalty=10;
-    const pct=Math.min(100,Math.round(sc.wo/tgt*100));
-    const ok=sc.wo>=tgt;
-    const bc=ok?'var(--green)':pct>60?'var(--gold)':'var(--red)';
-    const remaining=Math.max(0,tgt-sc.wo);
+    const tgt=pl.role==='Captain'?16:20;const bonus=pl.role==='Captain'?10:15;const penalty=10;
+    const pct=Math.min(100,Math.round(sc.wo/tgt*100));const ok=sc.wo>=tgt;
+    const bc=ok?'var(--green)':pct>60?'var(--gold)':'var(--red)';const remaining=Math.max(0,tgt-sc.wo);
     rHTML=`<div class="card"><div class="row"><div><div style="font-size:14px;font-weight:700">${pl.role} Target</div><div class="tmuted" style="font-size:12px">${sc.wo}/${tgt} workouts</div></div><div class="rbadge ${pl.role==='Captain'?'rCaptain':'rVC'}">${pl.role}</div></div><div class="pwrap"><div class="pbar" style="width:${pct}%;background:${bc}"></div></div>${ok?`<div class="warn-box warn-green" style="margin-top:10px;margin-bottom:0">✅ Target hit — +${bonus} pts will be added on May 31</div>`:`<div class="warn-box warn-red" style="margin-top:10px;margin-bottom:0">⚠️ ${remaining} more workouts needed — missing target deducts ${penalty} pts on May 31</div>`}</div>`;
   }
-  if(sc.wo<12){
-    const missing=12-sc.wo;
-    rHTML=`<div class="warn-box warn-orange">⚠️ You need ${missing} more workouts to avoid a <strong>${missing*5} pt deduction</strong> on May 31</div>`+rHTML;
-  }
+  if(sc.wo<12){const missing=12-sc.wo;rHTML=`<div class="warn-box warn-orange">⚠️ You need ${missing} more workouts to avoid a <strong>${missing*5} pt deduction</strong> on May 31</div>`+rHTML;}
   document.getElementById('roleBar').innerHTML=rHTML;
   document.getElementById('hStats').innerHTML=`<div class="sc"><div class="sv">${sc.wo}</div><div class="sl">Workouts</div></div><div class="sc"><div class="sv" style="color:var(--orange)">${sc.streak} 🔥</div><div class="sl">Streak</div></div>`;
-
-  // Calendar with tooltip
   const todayD=now.getMonth()===MONTH&&now.getFullYear()===YEAR?now.getDate():-1;
   const hdrs=['M','T','W','T','F','S','S'];
   let cal=hdrs.map(d=>`<div class="cdh">${d}</div>`).join('');
   for(let i=0;i<4;i++) cal+=`<div class="cd empty"></div>`;
   for(let d=1;d<=DAYS;d++){
     const logged=sc.days.has(d),isToday=d===todayD;
-    if(logged){
-      const workoutsToday=[...new Set(allLogs.filter(l=>l.player===me.name&&l.day===d).flatMap(l=>l.workouts||[l.workout]).filter(Boolean))].join(', ');
-      cal+=`<div class="cd logged" onclick="showCalTip(this,'${workoutsToday.replace(/'/g,"&#39;")}')">${d}</div>`;
-    } else {
-      cal+=`<div class="cd${isToday?' today':''}">${d}</div>`;
-    }
+    if(logged){const workoutsToday=[...new Set(allLogs.filter(l=>l.player===me.name&&l.day===d).flatMap(l=>l.workouts||[l.workout]).filter(Boolean))].join(', ');cal+=`<div class="cd logged" onclick="showCalTip(this,'${workoutsToday.replace(/'/g,"&#39;")}')">${d}</div>`;}
+    else{cal+=`<div class="cd${isToday?' today':''}">${d}</div>`;}
   }
   document.getElementById('calGrid').innerHTML=cal;
-
-  // Team streak card
   const team=pl.team;
   const teamLogs=allLogs.filter(l=>PLAYERS.find(p=>p.name===l.player&&p.team===team));
-  const dc={};
-  teamLogs.forEach(l=>{if(!dc[l.day]) dc[l.day]=new Set(); dc[l.day].add(l.player);});
+  const dc={};teamLogs.forEach(l=>{if(!dc[l.day])dc[l.day]=new Set();dc[l.day].add(l.player);});
   const bonusDays=Object.entries(dc).filter(([d,ps])=>ps.size>=3).map(([d])=>+d).sort((a,b)=>a-b);
   document.getElementById('teamStreakCard').innerHTML=`<div class="card-title">Team ${team} qualifying streak days</div>${bonusDays.length===0?'<div class="tmuted">No qualifying days yet. Get 3+ teammates to log on the same day!</div>':bonusDays.map(d=>`<div class="row" style="padding:6px 0;border-bottom:1px solid var(--border)"><span style="font-size:13px">May ${d} — ${dc[d].size} members</span><span style="font-size:11px;color:var(--green);font-weight:600">✅ Streak bonus</span></div>`).join('')}`;
 }
 
-function showCalTip(el,text){
-  document.querySelectorAll('.cal-tip').forEach(t=>t.remove());
-  const tip=document.createElement('div');
-  tip.className='cal-tip'; tip.textContent=text;
-  el.appendChild(tip);
-  setTimeout(()=>tip.remove(),2500);
-}
-
-function getRank(playerName){ const sorted=PLAYERS.map(p=>({name:p.name,pts:score(p.name).total})).sort((a,b)=>b.pts-a.pts); return sorted.findIndex(p=>p.name===playerName)+1; }
-
+function showCalTip(el,text){document.querySelectorAll('.cal-tip').forEach(t=>t.remove());const tip=document.createElement('div');tip.className='cal-tip';tip.textContent=text;el.appendChild(tip);setTimeout(()=>tip.remove(),2500);}
+function getRank(playerName){const sorted=PLAYERS.map(p=>({name:p.name,pts:score(p.name).total})).sort((a,b)=>b.pts-a.pts);return sorted.findIndex(p=>p.name===playerName)+1;}
 function getNudgeHTML(playerName,sc){
   const sorted=PLAYERS.map(p=>({name:p.name,pts:score(p.name).total})).sort((a,b)=>b.pts-a.pts);
-  const myIdx=sorted.findIndex(p=>p.name===playerName);
-  const myPts=sorted[myIdx].pts;
-  if(myIdx===0){ const gap=myPts-(sorted[1]?.pts||0); return `<div class="nudge"><div class="nudge-icon">👑</div><div class="nudge-text">You're leading the pack. <strong>${sorted[1]?.name}</strong> is ${gap} pts behind. Don't get comfortable.</div></div>`; }
-  const ahead=sorted[myIdx-1];
-  const gap=ahead.pts-myPts;
-  const needed=Math.ceil(gap/5);
+  const myIdx=sorted.findIndex(p=>p.name===playerName);const myPts=sorted[myIdx].pts;
+  if(myIdx===0){const gap=myPts-(sorted[1]?.pts||0);return `<div class="nudge"><div class="nudge-icon">👑</div><div class="nudge-text">You're leading the pack. <strong>${sorted[1]?.name}</strong> is ${gap} pts behind. Don't get comfortable.</div></div>`;}
+  const ahead=sorted[myIdx-1];const gap=ahead.pts-myPts;const needed=Math.ceil(gap/5);
   return `<div class="nudge"><div class="nudge-icon">⚡</div><div class="nudge-text">You're <strong>${gap} pts behind ${ahead.name}</strong>. ${needed} workout${needed>1?'s':''} and you overtake them.</div></div>`;
 }
 
-// ── LOG ────────────────────────────────────────────────────────────────────
-function pickDay(t){
-  if(t==='today'){
-    const now=new Date();
-    if(now.getMonth()!==MONTH||now.getFullYear()!==YEAR){alert('Today is not in May 2026');return;}
-    selDay=now.getDate();
-  }
-  goS2();
-}
-function showPicker(){
-  document.getElementById('pickerWrap').classList.remove('hidden');
-  const dp=document.getElementById('dpick');
-  dp.min=`${YEAR}-05-01`; dp.max=`${YEAR}-05-31`;
-}
-function pickDayFromInput(){ const v=document.getElementById('dpick').value; if(!v) return; selDay=new Date(v).getDate(); goS2(); }
+function pickDay(t){if(t==='today'){const now=new Date();if(now.getMonth()!==MONTH||now.getFullYear()!==YEAR){alert('Today is not in May 2026');return;}selDay=now.getDate();}goS2();}
+function showPicker(){document.getElementById('pickerWrap').classList.remove('hidden');}
+function pickDayFromInput(){const v=document.getElementById('dpick').value;if(!v)return;selDay=new Date(v).getDate();goS2();}
 function goS2(){
-  document.getElementById('ls1').classList.add('hidden');
-  document.getElementById('ls2').classList.remove('hidden');
+  document.getElementById('ls1').classList.add('hidden');document.getElementById('ls2').classList.remove('hidden');
   const dt=new Date(YEAR,MONTH,selDay);
   document.getElementById('lDateLbl').textContent=dt.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long'});
   const ex=allLogs.filter(l=>l.player===me.name&&l.day===selDay).flatMap(l=>l.workouts||[l.workout]).filter(Boolean);
   document.getElementById('lExisting').textContent=ex.length?`Already logged: ${ex.join(', ')}`:'';
-  buildChips(); selW=[]; updateSel(); updBtn();
+  buildChips();selW=[];updateSel();updBtn();
 }
 function buildChips(){
   const mine=[...new Set(allLogs.filter(l=>l.player===me.name).flatMap(l=>l.workouts||[l.workout]).filter(Boolean))];
   const all=[...new Set([...mine,...COMMON])];
-  document.getElementById('wChips').innerHTML=all.map((w,i)=>{
-    const cls=mine.includes(w)?'mine':'';
-    return `<div class="chip ${cls}" id="chip_${i}" onclick="toggleChip(this,'chip_${i}','${w.replace(/'/g,"\\'")}')">${w}</div>`;
-  }).join('');
+  document.getElementById('wChips').innerHTML=all.map((w,i)=>{const cls=mine.includes(w)?'mine':'';return `<div class="chip ${cls}" id="chip_${i}" onclick="toggleChip(this,'chip_${i}','${w.replace(/'/g,"\\'")}')">${w}</div>`;}).join('');
 }
-function toggleChip(el,chipId,w){ el.classList.toggle('sel'); if(el.classList.contains('sel')){if(!selW.includes(w)) selW.push(w);}else{selW=selW.filter(x=>x!==w);} updateSel(); updBtn(); }
-function addCustom(){ const inp=document.getElementById('custInp'); const v=inp.value.trim(); if(!v) return; if(!selW.includes(v)) selW.push(v); inp.value=''; updateSel(); updBtn(); }
-function updateSel(){ const w=document.getElementById('selPrev'),l=document.getElementById('selList'); if(selW.length===0){w.classList.add('hidden');return;} w.classList.remove('hidden'); l.textContent=selW.join(' · '); }
-function updBtn(){ document.getElementById('subBtn').disabled=selW.length===0; }
+function toggleChip(el,chipId,w){el.classList.toggle('sel');if(el.classList.contains('sel')){if(!selW.includes(w))selW.push(w);}else{selW=selW.filter(x=>x!==w);}updateSel();updBtn();}
+function addCustom(){const inp=document.getElementById('custInp');const v=inp.value.trim();if(!v)return;if(!selW.includes(v))selW.push(v);inp.value='';updateSel();updBtn();}
+function updateSel(){const w=document.getElementById('selPrev'),l=document.getElementById('selList');if(selW.length===0){w.classList.add('hidden');return;}w.classList.remove('hidden');l.textContent=selW.join(' · ');}
+function updBtn(){document.getElementById('subBtn').disabled=selW.length===0;}
 
 async function submitLog(){
-  const btn=document.getElementById('subBtn');
-  btn.disabled=true; btn.textContent='Saving...';
+  const btn=document.getElementById('subBtn');btn.disabled=true;btn.textContent='Saving...';
   try{
     await db.collection('logs').add({player:me.name,team:me.team,role:me.role,workouts:selW,day:selDay,month:MONTH,year:YEAR,timestamp:firebase.firestore.FieldValue.serverTimestamp()});
     const sc=score(me.name);
     const myDays=[...allLogs.filter(l=>l.player===me.name).map(l=>l.day)].sort((a,b)=>a-b);
-    const lastDay=myDays.length>=2?myDays[myDays.length-2]:null;
-    const isComeback=lastDay&&(selDay-lastDay)>=3;
-    document.getElementById('ls2').classList.add('hidden');
-    document.getElementById('ls3').classList.remove('hidden');
+    const lastDay=myDays.length>=2?myDays[myDays.length-2]:null;const isComeback=lastDay&&(selDay-lastDay)>=3;
+    document.getElementById('ls2').classList.add('hidden');document.getElementById('ls3').classList.remove('hidden');
     document.getElementById('succTitle').textContent=isComeback?'Welcome Back!':'Workout Logged!';
     document.getElementById('succSub').textContent=`${selW.join(', ')} · May ${selDay}`;
     const cbMsg=document.getElementById('comebackMsg');
@@ -611,44 +789,32 @@ async function submitLog(){
     document.getElementById('succStats').innerHTML=`<div class="srow" style="margin-bottom:0"><div class="sc"><div class="sv">${sc.total}</div><div class="sl">Points</div></div><div class="sc"><div class="sv">${sc.wo}</div><div class="sl">Workouts</div></div><div class="sc" style="grid-column:1/-1"><div class="sv" style="color:var(--orange)">${sc.streak} 🔥</div><div class="sl">Streak</div></div></div>`;
   }catch(e){alert('Error saving. Check connection.');btn.disabled=false;btn.textContent='Log Workout';}
 }
-function resetLog(){ selDay=null; selW=[]; ['ls1','ls2','ls3'].forEach((id,i)=>document.getElementById(id).classList[i===0?'remove':'add']('hidden')); document.getElementById('pickerWrap').classList.add('hidden'); showTab('home'); }
-function backToS1(){ document.getElementById('ls1').classList.remove('hidden'); document.getElementById('ls2').classList.add('hidden'); }
+function resetLog(){selDay=null;selW=[];['ls1','ls2','ls3'].forEach((id,i)=>document.getElementById(id).classList[i===0?'remove':'add']('hidden'));document.getElementById('pickerWrap').classList.add('hidden');showTab('home');}
+function backToS1(){document.getElementById('ls1').classList.remove('hidden');document.getElementById('ls2').classList.add('hidden');}
 
-// ── LEADERBOARD ────────────────────────────────────────────────────────────
 function renderLB(){
   const ts=['A','B','C'].map(t=>({t,s:teamTotal(t)})).sort((a,b)=>b.s-a.s);
   const tcol=t=>t==='A'?'var(--A)':t==='B'?'var(--B)':'var(--C)';
   document.getElementById('teamStand').innerHTML=ts.map((t,i)=>`<div class="tcard ${t.t}"><div><div class="tcname">#${i+1} Team ${t.t}</div><div style="font-size:11px;color:var(--muted);margin-top:3px">${PLAYERS.filter(p=>p.team===t.t).map(p=>p.name).join(', ')}</div></div><div style="text-align:right"><div style="font-size:28px;font-weight:900;color:${t.t==='A'?'var(--A)':t.t==='B'?'var(--B)':'var(--C)'}">${t.s}</div><div style="font-size:10px;color:var(--muted)">pts</div></div></div>`).join('');
   const ind=PLAYERS.map(p=>({...p,sc:score(p.name)})).sort((a,b)=>b.sc.total-a.sc.total);
   document.getElementById('indLb').innerHTML=ind.map((p,i)=>{
-    const tc=tcol(p.team); const tbg=p.team==='A'?'var(--Al)':p.team==='B'?'var(--Bl)':'var(--Cl)'; const isMe=p.name===me.name;
+    const tc=tcol(p.team);const tbg=p.team==='A'?'var(--Al)':p.team==='B'?'var(--Bl)':'var(--Cl)';const isMe=p.name===me.name;
     return `<div class="lbrow${i===0?' top1':''}" style="${isMe?'background:#f0fdf4;margin:0 -16px;padding:12px 16px;border-radius:8px':''}"><div class="lbrank ${i===0?'r1':i===1?'r2':i===2?'r3':''}">${i+1}</div><div style="width:34px;height:34px;border-radius:50%;background:${tbg};border:2px solid ${tc};display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:${tc};flex-shrink:0">${p.name[0]}</div><div class="lbinfo"><div class="lbname">${p.name}${isMe?' <span style="font-size:10px;color:var(--green);font-weight:700">· you</span>':''} <span class="rbadge ${p.role==='Captain'?'rCaptain':p.role==='Vice Captain'?'rVC':'rPlayer'}">${p.role}</span></div><div class="lbmeta">${p.sc.wo} workouts · ${p.sc.streak}🔥</div></div><div style="text-align:right"><div style="font-size:20px;font-weight:800;color:var(--text)">${p.sc.total}</div><div style="font-size:10px;color:var(--muted)">pts</div></div></div>`;
   }).join('');
   const my=score(me.name);
-  document.getElementById('ptsBk').innerHTML=`<div class="card-title">Your breakdown</div>${[
-    ['Base points',my.base,`${my.wo} workouts × 5`],
-    ['Perfect week',my.wb,'+10 per full Mon–Sun week'],
-    ['Role bonus',my.rb,ROLE_DESC[PLAYERS.find(p=>p.name===me.name).role].split('→')[0]],
-    ['Team streak',my.tb,'Cumulative team streak bonus (+1/+2/+3)'],
-    ['30-day bonus',my.b30,'All 31 days logged'],
-    ['Penalty',my.pen,'Applied May 31 — -5 per workout below 12'],
-  ].map(([l,v,s])=>`<div class="row" style="padding:8px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:13px;font-weight:500">${l}</div><div style="font-size:11px;color:var(--muted)">${s}</div></div><div style="font-size:15px;font-weight:800;color:${v<0?'var(--red)':v>0?'var(--green)':'var(--muted)'}">${v>0?'+':''}${v}</div></div>`).join('')}<div class="row" style="padding:12px 0 0"><div style="font-size:15px;font-weight:700">Total</div><div style="font-size:26px;font-weight:900;color:var(--text)">${my.total}</div></div>`;
+  document.getElementById('ptsBk').innerHTML=`<div class="card-title">Your breakdown</div>${[['Base points',my.base,`${my.wo} workouts × 5`],['Perfect week',my.wb,'+10 per full Mon–Sun week'],['Role bonus',my.rb,ROLE_DESC[PLAYERS.find(p=>p.name===me.name).role].split('→')[0]],['Team streak',my.tb,'Cumulative team streak bonus (+1/+2/+3)'],['30-day bonus',my.b30,'All 31 days logged'],['Penalty',my.pen,'Applied May 31 — -5 per workout below 12'],].map(([l,v,s])=>`<div class="row" style="padding:8px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:13px;font-weight:500">${l}</div><div style="font-size:11px;color:var(--muted)">${s}</div></div><div style="font-size:15px;font-weight:800;color:${v<0?'var(--red)':v>0?'var(--green)':'var(--muted)'}">${v>0?'+':''}${v}</div></div>`).join('')}<div class="row" style="padding:12px 0 0"><div style="font-size:15px;font-weight:700">Total</div><div style="font-size:26px;font-weight:900;color:var(--text)">${my.total}</div></div>`;
 }
 
-// ── FEED ───────────────────────────────────────────────────────────────────
 function renderFeed(){
   const sorted=[...allLogs].sort((a,b)=>(b.timestamp?.seconds||0)-(a.timestamp?.seconds||0));
   const tcol=t=>t==='A'?'var(--A)':t==='B'?'var(--B)':'var(--C)';
   const tbg=t=>t==='A'?'var(--Al)':t==='B'?'var(--Bl)':'var(--Cl)';
-
-  // Feed stats
   const now=new Date();
   const todayDay=now.getMonth()===MONTH&&now.getFullYear()===YEAR?now.getDate():-1;
-  const todayLogs=allLogs.filter(l=>l.day===todayDay);
-  const todayPlayers=new Set(todayLogs.map(l=>l.player));
+  const todayPlayers=new Set(allLogs.filter(l=>l.day===todayDay).map(l=>l.player));
   const todayCount=todayPlayers.size;
   const teamCounts={A:0,B:0,C:0};
-  todayPlayers.forEach(name=>{ const p=PLAYERS.find(x=>x.name===name); if(p) teamCounts[p.team]++; });
+  todayPlayers.forEach(name=>{const p=PLAYERS.find(x=>x.name===name);if(p)teamCounts[p.team]++;});
   const topTeamEntry=Object.entries(teamCounts).sort((a,b)=>b[1]-a[1])[0];
   const topTeam=topTeamEntry[1]>0?topTeamEntry[0]:null;
   const allStreaks=PLAYERS.map(p=>({name:p.name,streak:score(p.name).streak})).filter(p=>p.streak>0).sort((a,b)=>b.streak-a.streak);
@@ -670,47 +836,28 @@ function renderFeed(){
     </div>`:''}
   </div>`;
 
-  if(sorted.length===0){
-    document.getElementById('feedList').innerHTML=statsHTML+'<div class="tmuted">No workouts yet. Be the first! 💪</div>'; return;
-  }
+  if(sorted.length===0){document.getElementById('feedList').innerHTML=statsHTML+'<div class="tmuted">No workouts yet. Be the first! 💪</div>';return;}
   document.getElementById('feedList').innerHTML=statsHTML+sorted.slice(0,60).map(l=>{
     const w=Array.isArray(l.workouts)?l.workouts.join(', '):(l.workout||'');
     const ts=l.timestamp?.seconds?new Date(l.timestamp.seconds*1000):null;
     const tstr=ts?ts.toLocaleDateString('en-IN',{day:'numeric',month:'short'})+' · '+ts.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}):`May ${l.day}`;
     const isMine=l.player===me.name;
     const ct=(PLAYERS.find(x=>x.name===l.player)||{team:l.team}).team;
-    return `<div class="fi"><div class="fav" style="background:${tbg(ct)};color:${tcol(ct)};border:2px solid ${tcol(ct)}">${l.player[0]}</div><div class="ftxt"><div class="fn">${l.player} <span style="font-size:10px;color:${tcol(ct)};font-weight:700">Team ${ct}</span></div><div class="fw">💪 ${w}</div><div class="ft">${tstr} · <span style="font-size:10px;color:var(--muted)">for May ${l.day}</span>${l.day<todayDay&&ts&&ts.toDateString()===now.toDateString()?' <span style="background:var(--orange-l);color:var(--orange);font-size:9px;font-weight:700;padding:1px 5px;border-radius:4px;margin-left:4px">backlog</span>':''}</div></div></div>${isMine?`<button onclick="deleteLog('${l.id}')" style="background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;padding:4px 8px;flex-shrink:0">×</button>`:''}</div>`;
+    const isBacklog=l.day<todayDay&&ts&&ts.toDateString()===now.toDateString();
+    return `<div class="fi"><div class="fav" style="background:${tbg(ct)};color:${tcol(ct)};border:2px solid ${tcol(ct)}">${l.player[0]}</div><div class="ftxt"><div class="fn">${l.player} <span style="font-size:10px;color:${tcol(ct)};font-weight:700">Team ${ct}</span></div><div class="fw">💪 ${w}</div><div class="ft">${tstr} · <span style="color:var(--muted)">for May ${l.day}</span>${isBacklog?' <span style="background:var(--orange-l);color:var(--orange);font-size:9px;font-weight:700;padding:1px 5px;border-radius:4px;margin-left:4px">backlog</span>':''}</div></div>${isMine?`<button onclick="deleteLog('${l.id}')" style="background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;padding:4px 8px;flex-shrink:0">×</button>`:''}</div>`;
   }).join('');
 }
 
-async function deleteLog(id){ if(!confirm('Delete this workout entry?')) return; await db.collection('logs').doc(id).delete(); }
+async function deleteLog(id){if(!confirm('Delete this workout entry?'))return;await db.collection('logs').doc(id).delete();}
 
-// ── ADMIN ──────────────────────────────────────────────────────────────────
-async function award30(){
-  const p=document.getElementById('aPlayer').value;
-  if(!p){alert('Select player');return;}
-  if(bonus30.find(b=>b.player===p)){alert('Already awarded');return;}
-  await db.collection('bonuses_30day').add({player:p,month:MONTH,year:YEAR});
-  alert(`✅ +50 pts awarded to ${p}`);
-}
-function renderAdminRoles(){
-  document.getElementById('adminRoles').innerHTML=PLAYERS.map(p=>`<div style="display:grid;grid-template-columns:1fr 80px 130px;gap:6px;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)"><span style="font-size:13px;font-weight:700">${p.name}</span><select id="team_${p.name}" style="padding:6px;font-size:12px;margin-bottom:0"><option value="A"${p.team==='A'?' selected':''}>Team A</option><option value="B"${p.team==='B'?' selected':''}>Team B</option><option value="C"${p.team==='C'?' selected':''}>Team C</option></select><select id="role_${p.name}" style="padding:6px;font-size:12px;margin-bottom:0">${['Player','Vice Captain','Captain'].map(r=>`<option value="${r}"${p.role===r?' selected':''}>${r}</option>`).join('')}</select></div>`).join('');
-}
-function saveRoles(){
-  PLAYERS.forEach(p=>{ const t=document.getElementById(`team_${p.name}`)?.value; const r=document.getElementById(`role_${p.name}`)?.value; if(t) p.team=t; if(r) p.role=r; });
-  const fresh=PLAYERS.find(p=>p.name===me.name);
-  if(fresh){me.team=fresh.team;me.role=fresh.role;}
-  localStorage.setItem('sw_user',JSON.stringify(me));
-  localStorage.setItem('sw_players',JSON.stringify(PLAYERS));
-  renderAdminRoles(); refresh();
-  alert('✅ Teams and roles updated!');
-}
+async function award30(){const p=document.getElementById('aPlayer').value;if(!p){alert('Select player');return;}if(bonus30.find(b=>b.player===p)){alert('Already awarded');return;}await db.collection('bonuses_30day').add({player:p,month:MONTH,year:YEAR});alert(`✅ +50 pts awarded to ${p}`);}
+function renderAdminRoles(){document.getElementById('adminRoles').innerHTML=PLAYERS.map(p=>`<div style="display:grid;grid-template-columns:1fr 80px 130px;gap:6px;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)"><span style="font-size:13px;font-weight:700">${p.name}</span><select id="team_${p.name}" style="padding:6px;font-size:12px;margin-bottom:0"><option value="A"${p.team==='A'?' selected':''}>Team A</option><option value="B"${p.team==='B'?' selected':''}>Team B</option><option value="C"${p.team==='C'?' selected':''}>Team C</option></select><select id="role_${p.name}" style="padding:6px;font-size:12px;margin-bottom:0">${['Player','Vice Captain','Captain'].map(r=>`<option value="${r}"${p.role===r?' selected':''}>${r}</option>`).join('')}</select></div>`).join('');}
+function saveRoles(){PLAYERS.forEach(p=>{const t=document.getElementById(`team_${p.name}`)?.value;const r=document.getElementById(`role_${p.name}`)?.value;if(t)p.team=t;if(r)p.role=r;});const fresh=PLAYERS.find(p=>p.name===me.name);if(fresh){me.team=fresh.team;me.role=fresh.role;}localStorage.setItem('sw_user',JSON.stringify(me));localStorage.setItem('sw_players',JSON.stringify(PLAYERS));renderAdminRoles();refresh();alert('✅ Teams and roles updated!');}
 
 const TABS=['home','log','lb','feed','admin'];
-const ADMIN_PIN='9090';
-let adminUnlocked=false;
+const ADMIN_PIN='9090';let adminUnlocked=false;
 function showTab(t){
-  if(t==='admin'&&!adminUnlocked){ const pin=prompt('Enter admin PIN:'); if(pin!==ADMIN_PIN){alert('Wrong PIN');return;} adminUnlocked=true; }
+  if(t==='admin'&&!adminUnlocked){const pin=prompt('Enter admin PIN:');if(pin!==ADMIN_PIN){alert('Wrong PIN');return;}adminUnlocked=true;}
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
   document.getElementById(`page-${t}`).classList.add('active');
