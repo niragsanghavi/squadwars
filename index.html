@@ -685,43 +685,6 @@ function buildReportCard(playerName){
   </div>`;
 }
 
-  // Hero stat logic
-  let heroNum, heroLabel;
-  if(sc.wo>=24){heroNum=sc.wo;heroLabel='Days Forged';}
-  else if(sc.bestStreak>=14){heroNum=sc.bestStreak;heroLabel='Days Unbroken';}
-  else if(sc.teamStreakDays>=10){heroNum=sc.teamStreakDays;heroLabel='Team Bonus Days';}
-  else{heroNum=sc.total;heroLabel='Total Points';}
-
-  const teamWon=teamTotal(p.team)===Math.max(...['A','B','C'].map(t=>teamTotal(t)));
-
-  return `<div class="report-card" id="rCard_${playerName}" style="background:linear-gradient(160deg,${c1} 0%,${c2} 100%)">
-    <div class="rc-header">
-      <div class="rc-month">Squad Wars · May 2026</div>
-      <div class="rc-name">${playerName}</div>
-      <div class="rc-badge">${superlative.icon} ${superlative.label}</div>
-      <div class="rc-team">Team ${p.team} · ${teamWon?'🏆 Winners':'May 2026'} · Rank #${rank} of ${PLAYERS.length}</div>
-    </div>
-    <div class="rc-hero">
-      <div class="rc-hero-num">${heroNum}</div>
-      <div class="rc-hero-label">${heroLabel}</div>
-    </div>
-    <div class="rc-stats">
-      <div class="rc-stat"><div class="rc-stat-v">${sc.wo}</div><div class="rc-stat-l">Workouts</div></div>
-      <div class="rc-stat"><div class="rc-stat-v">${sc.total}</div><div class="rc-stat-l">Points</div></div>
-      <div class="rc-stat"><div class="rc-stat-v">${sc.bestStreak}🔥</div><div class="rc-stat-l">Best Streak</div></div>
-      <div class="rc-stat"><div class="rc-stat-v">${sc.teamStreakDays}</div><div class="rc-stat-l">Team Days</div></div>
-      <div class="rc-stat"><div class="rc-stat-v">${sc.wb/10}</div><div class="rc-stat-l">Perfect Wks</div></div>
-      <div class="rc-stat"><div class="rc-stat-v">#${rank}</div><div class="rc-stat-l">Final Rank</div></div>
-    </div>
-    <div class="rc-para">"${paragraph}"</div>
-    <div class="rc-pills">${pills.map(p=>`<div class="rc-pill">${p}</div>`).join('')}</div>
-    <div class="rc-closing"><div class="rc-closing-text">${closing}</div></div>
-    <div class="rc-footer">
-      <div class="rc-footer-brand">SQUAD WARS · MAY 2026</div>
-      <div style="font-size:11px;color:rgba(255,255,255,0.4)">${sc.wo} workouts · ${sc.total} pts</div>
-    </div>
-  </div>`;
-}
 
 function buildTeamCard(team){
   const members=PLAYERS.filter(p=>p.team===team);
